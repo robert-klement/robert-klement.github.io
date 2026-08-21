@@ -22,13 +22,14 @@
     html { scroll-behavior: smooth; font-size: 16px; }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+                   'Helvetica Neue', sans-serif;
       line-height: 1.75;
       background: var(--bg);
       color: var(--text);
     }
 
-    /* ── Sticky nav ──────────────────────────────────────────────────── */
+    /* ── Sticky nav ─────────────────────────────────────────────────── */
     nav {
       position: sticky;
       top: 0;
@@ -45,20 +46,20 @@
     nav ul {
       list-style: none;
       display: flex;
-      gap: 2rem;
-      font-size: 0.8rem;
+      gap: 1.75rem;
+      font-size: 0.78rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;
     }
     nav a {
       text-decoration: none;
       color: var(--muted);
-      transition: color 0.2s;
       border-bottom: none;
+      transition: color 0.2s;
     }
     nav a:hover { color: var(--accent); }
 
-    /* ── Page header ─────────────────────────────────────────────────── */
+    /* ── Page header ────────────────────────────────────────────────── */
     .page-header {
       max-width: 720px;
       margin: 0 auto;
@@ -85,19 +86,15 @@
       border: none;
     }
 
-    /* ── Main content ────────────────────────────────────────────────── */
+    /* ── Main content ───────────────────────────────────────────────── */
     main {
       max-width: 720px;
       margin: 0 auto;
       padding: 0 2rem 5rem;
     }
 
-    section {
-      padding-top: 3rem;
-    }
-    section + section {
-      border-top: 1px solid var(--border);
-    }
+    section { padding-top: 3rem; }
+    section + section { border-top: 1px solid var(--border); }
 
     h2 {
       font-size: 0.75rem;
@@ -107,11 +104,21 @@
       color: var(--accent);
       margin-bottom: 1.25rem;
     }
+    h3 {
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 2rem;
+      margin-bottom: 0.75rem;
+    }
+    h3:first-of-type { margin-top: 1.25rem; }
 
     p { margin-bottom: 1em; }
     p:last-child { margin-bottom: 0; }
 
-    /* ── Links ───────────────────────────────────────────────────────── */
+    /* ── Links ──────────────────────────────────────────────────────── */
     a {
       color: var(--accent-link);
       text-decoration: none;
@@ -120,30 +127,23 @@
     }
     a:hover { border-bottom-color: var(--accent-link); }
 
-    /* ── Plain list (no bullets, used for talks/contact) ─────────────── */
-    ul.plain {
-      list-style: none;
-      padding: 0;
-    }
-    ul.plain li {
-      padding: 0.2rem 0;
-    }
-
-    /* ── Bullet list (research areas) ────────────────────────────────── */
+    /* ── Bullet list ────────────────────────────────────────────────── */
     ul.bullet {
       padding-left: 1.25rem;
       margin-bottom: 1.25rem;
     }
-    ul.bullet li {
-      margin-bottom: 0.4rem;
-    }
+    ul.bullet li { margin-bottom: 0.35rem; }
 
-    /* ── Profile link pills ──────────────────────────────────────────── */
+    /* ── Plain list ─────────────────────────────────────────────────── */
+    ul.plain { list-style: none; padding: 0; }
+    ul.plain li { padding: 0.2rem 0; }
+
+    /* ── Profile link pills ─────────────────────────────────────────── */
     .profile-links {
       display: flex;
       gap: 0.6rem;
       flex-wrap: wrap;
-      margin-top: 1.25rem;
+      margin-top: 1.5rem;
     }
     .profile-links a {
       font-size: 0.82rem;
@@ -158,21 +158,41 @@
       color: var(--accent-link);
     }
 
-    /* ── Publications list ───────────────────────────────────────────── */
-    .pub-list {
-      list-style: none;
-      padding: 0;
-      margin-bottom: 1em;
+    /* ── Pub stats grid ─────────────────────────────────────────────── */
+    .pub-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.75rem;
+      margin-bottom: 2rem;
     }
+    .stat-box {
+      padding: 0.75rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      background: #fff;
+    }
+    .stat-number {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 0.73rem;
+      color: var(--muted);
+      margin-top: 0.3rem;
+      line-height: 1.3;
+    }
+
+    /* ── Publications list ──────────────────────────────────────────── */
+    .pub-list { list-style: none; padding: 0; margin-bottom: 1em; }
     .pub-list li {
       padding: 0.65rem 0;
       border-bottom: 1px solid var(--border);
       font-size: 0.95rem;
       line-height: 1.6;
     }
-    .pub-list li:first-child {
-      border-top: 1px solid var(--border);
-    }
+    .pub-list li:first-child { border-top: 1px solid var(--border); }
     .pub-year {
       display: inline-block;
       min-width: 2.8rem;
@@ -181,20 +201,38 @@
       color: var(--muted);
     }
 
-    /* ── Talks ───────────────────────────────────────────────────────── */
-    .talk-item {
-      padding: 0.5rem 0;
+    /* ── Ruled items (talks, service, teaching) ─────────────────────── */
+    .ruled-item {
+      padding: 0.55rem 0;
       border-bottom: 1px solid var(--border);
       font-size: 0.95rem;
       line-height: 1.6;
     }
-    .talk-item:first-of-type { border-top: 1px solid var(--border); }
-    .talk-meta {
+    .ruled-item:first-of-type { border-top: 1px solid var(--border); }
+    .item-meta {
       font-size: 0.82rem;
       color: var(--muted);
     }
+    .badge {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 0.1rem 0.45rem;
+      border-radius: 2px;
+      background: var(--accent);
+      color: #fff;
+      margin-right: 0.4rem;
+      vertical-align: middle;
+    }
+    .badge-muted {
+      background: transparent;
+      color: var(--muted);
+      border: 1px solid var(--border);
+    }
 
-    /* ── Footer ──────────────────────────────────────────────────────── */
+    /* ── Footer ─────────────────────────────────────────────────────── */
     footer {
       max-width: 720px;
       margin: 0 auto;
@@ -204,19 +242,20 @@
       color: var(--muted);
     }
 
-    /* ── Responsive ──────────────────────────────────────────────────── */
+    /* ── Responsive ─────────────────────────────────────────────────── */
     @media (max-width: 600px) {
-      nav ul { gap: 1.25rem; }
+      nav ul { gap: 1rem; }
       .page-header { padding: 3rem 1.25rem 2rem; }
       .page-header h1 { font-size: 2rem; }
       main { padding: 0 1.25rem 4rem; }
       footer { padding: 1.5rem 1.25rem; }
+      .pub-stats { grid-template-columns: repeat(2, 1fr); }
     }
   </style>
 </head>
 <body>
 
-  <!-- ── Navigation ──────────────────────────────────────────────────── -->
+  <!-- ── Navigation ──────────────────────────────────────────────── -->
   <nav>
     <ul>
       <li><a href="#about">About</a></li>
@@ -224,132 +263,276 @@
       <li><a href="#publications">Publications</a></li>
       <li><a href="#talks">Talks</a></li>
       <li><a href="#teaching">Teaching</a></li>
+      <li><a href="#service">Service</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
   </nav>
 
-  <!-- ── Page header ─────────────────────────────────────────────────── -->
+  <!-- ── Page header ─────────────────────────────────────────────── -->
   <div class="page-header">
     <h1>Robert Klement</h1>
-    <p class="subtitle">
-      <!-- UPDATE: your title and institution, e.g. "Postdoctoral Scholar · Caltech" -->
-      [Position] · [Institution] · Pasadena, CA
-    </p>
+    <p class="subtitle">ESO Research Fellow &middot; CHARA Array, Mount Wilson, CA</p>
     <span class="accent-rule"></span>
   </div>
 
   <main>
 
-    <!-- ── About ───────────────────────────────────────────────────────── -->
+    <!-- ── About ───────────────────────────────────────────────────── -->
     <section id="about">
       <h2>About</h2>
       <p>
-        <!-- UPDATE: write 2–3 sentences about yourself. Example below — edit freely. -->
-        I am a [position] at [Institution]. My research focuses on the observational
-        characterization of Be+sdOB binary star systems — interacting binaries consisting
-        of classical Be stars and hot, stripped subdwarf companions. I work with
-        spectroscopic, interferometric, and photometric observations to study mass
-        transfer histories, orbital dynamics, and circumstellar disk structure.
+        I am a Research Fellow at the European Southern Observatory (ESO). In my current,
+        fourth year of the fellowship, I am stationed at the
+        <a href="https://www.chara.gsu.edu/" target="_blank" rel="noopener">CHARA Array</a>
+        on Mount Wilson, California, with an affiliation to Nice Observatory for the SPICA
+        beam combiner. During the first three years (2022–2024), I held VLT/VLTI Instrument
+        Fellow duties at Paranal Observatory in Chile, working successively with the MATISSE
+        and GRAVITY instruments.
       </p>
       <p>
-        <!-- UPDATE: add your background / career history here -->
-        [Add a sentence about where you studied / previous positions / how you got here.]
+        Before joining ESO, I was a Postdoctoral Research Associate at the
+        <a href="https://www.chara.gsu.edu/" target="_blank" rel="noopener">Center for
+        High Angular Resolution Astronomy (CHARA)</a> at Georgia State University
+        (2017–2022), contributing to telescope operations and conducting independent
+        research. I earned my Ph.D. in Astrophysics from Charles University in Prague
+        in 2017, in joint supervision with ESO Santiago.
       </p>
     </section>
 
-    <!-- ── Research ────────────────────────────────────────────────────── -->
+    <!-- ── Research ────────────────────────────────────────────────── -->
     <section id="research">
       <h2>Research</h2>
       <p>
-        My work spans several connected areas in observational stellar astrophysics,
-        with a particular focus on Be stars and their binary companions.
-        For refereed publications, see my profiles below.
+        My research centers on the role of binarity in the evolution of massive stars,
+        with a particular focus on classical Be stars and their hot, stripped subdwarf
+        companions. I combine optical/infrared interferometry, high-resolution spectroscopy,
+        and radio observations to characterize the physical and orbital properties of these
+        systems and their circumstellar disks.
       </p>
       <ul class="bullet">
-        <li>Be+sdOB Binary Star Systems (key targets: AN Col, φ Persei)</li>
-        <li>Optical Long-Baseline Interferometry (VLTI/GRAVITY, CHARA)</li>
-        <li>High-Resolution Spectroscopy &amp; Radial Velocities</li>
-        <li>Circumstellar Disk Modeling</li>
-        <li>Mass Transfer &amp; Binary Stellar Evolution</li>
+        <li>Be+sdOB binary star systems (key targets: AN Col, &phi; Persei)</li>
+        <li>Circumstellar disk modeling &mdash; tidal and radiative influence of sdOB companions</li>
+        <li>Optical long-baseline interferometry
+            (VLTI/GRAVITY, CHARA/MIRC-X, MYSTIC, PAVO, VEGA, SPICA)</li>
+        <li>High-resolution spectroscopy &amp; radial velocities</li>
+        <li>Binarity surveys via interferometry, spectroscopy, and radio observations</li>
+        <li>Beam combiner instrumentation &amp; development (PAVO Blue, SPICA)</li>
       </ul>
+      <p>
+        <strong>Observing experience:</strong> I have accumulated 240+ nights as a science
+        observer at the VLT/VLTI (GRAVITY, MATISSE, PIONIER), 200+ nights at the CHARA
+        Array (MIRC-X, MYSTIC, PAVO, VEGA, SPICA), and additional observing experience
+        with the VLA, APEX, <em>Hubble</em>/STIS, LDT/EXPRES, and the Apache Point ARC
+        echelle spectrograph.
+      </p>
       <div class="profile-links">
-        <a href="https://ui.adsabs.harvard.edu/search/q=author%3A%22klement%22&sort=date+desc%2C+bibcode+desc" target="_blank" rel="noopener">NASA ADS</a>
-        <!-- UPDATE: replace # with your actual ORCID URL, e.g. https://orcid.org/0000-0000-0000-0000 -->
-        <a href="#" target="_blank" rel="noopener">ORCID</a>
-        <!-- UPDATE: replace # with your Google Scholar URL -->
-        <a href="#" target="_blank" rel="noopener">Google Scholar</a>
-        <a href="https://github.com/robert-klement" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://ui.adsabs.harvard.edu/search/q=orcid%3A0000-0002-4313-0169&sort=date+desc%2C+bibcode+desc"
+           target="_blank" rel="noopener">NASA ADS</a>
+        <a href="https://orcid.org/0000-0002-4313-0169"
+           target="_blank" rel="noopener">ORCID</a>
+        <a href="https://github.com/robert-klement"
+           target="_blank" rel="noopener">GitHub</a>
       </div>
     </section>
 
-    <!-- ── Publications ─────────────────────────────────────────────────── -->
+    <!-- ── Publications ────────────────────────────────────────────── -->
     <section id="publications">
-      <h2>Selected Publications</h2>
+      <h2>Publications</h2>
+
+      <div class="pub-stats">
+        <div class="stat-box">
+          <div class="stat-number">31</div>
+          <div class="stat-label">refereed papers</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-number">711</div>
+          <div class="stat-label">total citations</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-number">15</div>
+          <div class="stat-label">h-index</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-number">9</div>
+          <div class="stat-label">first-author papers</div>
+        </div>
+      </div>
+
+      <p>
+        Full list on
+        <a href="https://ui.adsabs.harvard.edu/search/q=orcid%3A0000-0002-4313-0169&sort=date+desc%2C+bibcode+desc"
+           target="_blank" rel="noopener">NASA ADS</a>
+        and
+        <a href="https://orcid.org/0000-0002-4313-0169"
+           target="_blank" rel="noopener">ORCID</a>.
+        A selection of recent publications:
+      </p>
+
       <ul class="pub-list">
         <li>
           <span class="pub-year">2025</span>
           Lechien et al. (incl. Klement) &mdash;
-          <!-- UPDATE: add the paper title here -->
-          [Paper title].
-          <em>ApJL</em> 990, L51.
-          <a href="https://doi.org/10.3847/2041-8213/adcf9c" target="_blank" rel="noopener">ADS</a>
+          <em>ApJL</em> 990, L51. &nbsp;
+          <a href="https://doi.org/10.3847/2041-8213/adcf9c"
+             target="_blank" rel="noopener">ADS</a>
         </li>
-        <!-- ADD more publications here, following the same pattern:
+        <!-- Add more recent publications below in the same format:
         <li>
           <span class="pub-year">20XX</span>
-          Author et al. &mdash; [Title]. <em>Journal</em> Vol, Page.
+          Author et al. &mdash; [Title]. <em>Journal</em> Vol, Page. &nbsp;
           <a href="[ADS link]" target="_blank" rel="noopener">ADS</a>
         </li>
         -->
       </ul>
-      <p style="font-size:0.9rem; color:var(--muted);">
-        Complete list on
-        <a href="https://ui.adsabs.harvard.edu/search/q=author%3A%22klement%22&sort=date+desc%2C+bibcode+desc">NASA ADS</a>.
-      </p>
     </section>
 
-    <!-- ── Talks ────────────────────────────────────────────────────────── -->
+    <!-- ── Talks ────────────────────────────────────────────────────── -->
     <section id="talks">
       <h2>Talks &amp; Presentations</h2>
-      <!-- UPDATE: add your talks. Duplicate the block below for each one. -->
-      <div class="talk-item">
-        <div>[Talk title]</div>
-        <div class="talk-meta">[Conference / Workshop] · [City, Country] · [Year]</div>
+
+      <h3>Invited Review Talks</h3>
+
+      <div class="ruled-item">
+        <div>
+          <span class="badge badge-muted">Upcoming</span>
+          &ldquo;Never be alone! The companions to Be stars&rdquo;
+        </div>
+        <div class="item-meta">
+          LIAC42 &mdash; To Be or not to Be: Understanding the star, the disk, and the
+          stripped companions &middot; Li&egrave;ge, Belgium &middot; July 2026
+        </div>
       </div>
-      <div class="talk-item">
-        <div>[Talk title]</div>
-        <div class="talk-meta">[Conference / Workshop] · [City, Country] · [Year]</div>
+
+      <div class="ruled-item">
+        <div>&ldquo;Multiplicity among classical Be stars&rdquo;</div>
+        <div class="item-meta">
+          3,2,1: Massive Triples, Binaries and Mergers 2023 &middot;
+          Leuven, Belgium &middot; July 2023
+        </div>
       </div>
-      <!-- Example real entry you can adapt:
-      <div class="talk-item">
-        <div>Characterizing Be+sdOB Binaries with Optical Interferometry</div>
-        <div class="talk-meta">238th AAS Meeting · Contributed Talk · Anchorage, AK · June 2021</div>
+
+      <h3>Selected Other Talks</h3>
+
+      <div class="ruled-item">
+        <div>PMOIRED binary grid search tutorial</div>
+        <div class="item-meta">
+          Workshop on New Visions in Optical Interferometry &middot;
+          Socorro, NM, USA &middot; March 2026
+        </div>
       </div>
-      -->
+
+      <div class="ruled-item">
+        <div>Tutorial: observing, reduction, and data analysis for CHARA/VEGA</div>
+        <div class="item-meta">
+          GSU Summer Lecture Series &middot; July 2021
+        </div>
+      </div>
+
     </section>
 
-    <!-- ── Teaching ──────────────────────────────────────────────────────── -->
+    <!-- ── Teaching & Mentoring ─────────────────────────────────────── -->
     <section id="teaching">
-      <h2>Teaching</h2>
-      <!-- UPDATE: list any courses you have taught or TA'd -->
-      <ul class="plain">
-        <li>[Course name], [Institution] ([Year])</li>
-        <li>[Course name], [Institution] ([Year])</li>
-      </ul>
+      <h2>Teaching &amp; Mentoring</h2>
+
+      <h3>Lectures &amp; Tutorials</h3>
+
+      <div class="ruled-item">
+        <div>
+          Introduction to Optical Interferometry: Basic Concepts, Observations, and
+          Fitting of Geometrical Models
+        </div>
+        <div class="item-meta">
+          Series of three 1.5-hour lectures &middot; Selected Chapters on Astrophysics,
+          Charles University, Prague &middot; November 2024 (remote)
+        </div>
+      </div>
+
+      <div class="ruled-item">
+        <div>PMOIRED binary grid search &mdash; hands-on tutorial</div>
+        <div class="item-meta">
+          Workshop on New Visions in Optical Interferometry &middot;
+          Socorro, NM, USA &middot; March 2026
+        </div>
+      </div>
+
+      <div class="ruled-item">
+        <div>CHARA/VEGA observing, reduction, and data analysis &mdash; tutorial</div>
+        <div class="item-meta">
+          GSU Summer Lecture Series &middot; July 2021
+        </div>
+      </div>
+
+      <h3>Student Supervision</h3>
+
+      <div class="ruled-item">
+        <div>Jana &Scaron;vr&#269;kov&aacute; &mdash; Ph.D. student (ESO Chile studentship)</div>
+        <div class="item-meta">Supervisor &middot; November 2024 – November 2025</div>
+      </div>
+
+      <div class="ruled-item">
+        <div>Suman Bhattacharyya &mdash; Ph.D. student (ESO studentship)</div>
+        <div class="item-meta">Co-supervisor &middot; June 2024 – June 2025</div>
+      </div>
+
     </section>
 
-    <!-- ── Contact ───────────────────────────────────────────────────────── -->
+    <!-- ── Service ──────────────────────────────────────────────────── -->
+    <section id="service">
+      <h2>Community Service</h2>
+
+      <div class="ruled-item">
+        <div>Executive member, IAU Working Group on Active B-type Stars (WGABS)</div>
+        <div class="item-meta">2022 – 2028</div>
+      </div>
+
+      <div class="ruled-item">
+        <div>Internal TAC member, CHARA Array</div>
+        <div class="item-meta">
+          Observing semesters 2018B, 2019B, 2020B, 2022B, 2026B
+        </div>
+      </div>
+
+      <div class="ruled-item">
+        <div>Member, ESO Visitors Committee, Chile</div>
+        <div class="item-meta">
+          Regular evaluation of short-term research visit applications &middot;
+          November 2022 – November 2025
+        </div>
+      </div>
+
+      <div class="ruled-item">
+        <div>
+          Technical feasibility evaluator for accepted GRAVITY observing proposals
+        </div>
+        <div class="item-meta">ESO &middot; November 2022 – November 2025</div>
+      </div>
+
+      <div class="ruled-item">
+        <div>Member, ESO Student Internship Committee</div>
+        <div class="item-meta">2024 call</div>
+      </div>
+
+    </section>
+
+    <!-- ── Contact ──────────────────────────────────────────────────── -->
     <section id="contact">
       <h2>Contact</h2>
       <ul class="plain">
+        <li>Email: <a href="mailto:robertklement@gmail.com">robertklement@gmail.com</a></li>
         <li>
-          Email:
-          <!-- UPDATE: replace with your email address -->
-          <a href="mailto:your.email@institution.edu">your.email@institution.edu</a>
+          ORCID:
+          <a href="https://orcid.org/0000-0002-4313-0169"
+             target="_blank" rel="noopener">0000-0002-4313-0169</a>
         </li>
-        <li>GitHub: <a href="https://github.com/robert-klement" target="_blank" rel="noopener">robert-klement</a></li>
-        <!-- UPDATE: add your mailing address if you'd like -->
-        <!-- <li>[Institution name]<br>[Department]<br>[Address]</li> -->
+        <li>
+          GitHub:
+          <a href="https://github.com/robert-klement"
+             target="_blank" rel="noopener">robert-klement</a>
+        </li>
+        <li style="margin-top:0.5rem; color:var(--muted); font-size:0.9rem;">
+          Currently stationed at the CHARA Array, Mount Wilson, CA.<br>
+          Affiliated with ESO and Nice Observatory.
+        </li>
       </ul>
     </section>
 
