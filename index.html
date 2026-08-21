@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Robert Klement – Astrophysicist</title>
+  <style>
+    /* ── Design tokens ──────────────────────────────────────────────────
+       Accent color: #7c3626  — drawn from Hα emission at 656 nm,
+       the defining spectroscopic signature of classical Be stars.     */
+    :root {
+      --bg:           #f8f7f3;
+      --text:         #1c1c28;
+      --accent:       #7c3626;
+      --accent-link:  #9c4535;
+      --muted:        #6b6b78;
+      --border:       #ddd9d0;
+      --nav-h:        50px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      line-height: 1.75;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    /* ── Sticky nav ──────────────────────────────────────────────────── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(248, 247, 243, 0.95);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      border-bottom: 1px solid var(--border);
+      height: var(--nav-h);
+      display: flex;
+      align-items: center;
+      padding: 0 2rem;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    nav a {
+      text-decoration: none;
+      color: var(--muted);
+      transition: color 0.2s;
+      border-bottom: none;
+    }
+    nav a:hover { color: var(--accent); }
+
+    /* ── Page header ─────────────────────────────────────────────────── */
+    .page-header {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 4rem 2rem 2.5rem;
+    }
+    .page-header h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      color: var(--text);
+      line-height: 1.1;
+    }
+    .page-header .subtitle {
+      margin-top: 0.5rem;
+      color: var(--muted);
+      font-size: 1rem;
+    }
+    .accent-rule {
+      display: block;
+      margin-top: 1.5rem;
+      height: 3px;
+      width: 44px;
+      background: var(--accent);
+      border: none;
+    }
+
+    /* ── Main content ────────────────────────────────────────────────── */
+    main {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 2rem 5rem;
+    }
+
+    section {
+      padding-top: 3rem;
+    }
+    section + section {
+      border-top: 1px solid var(--border);
+    }
+
+    h2 {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.25rem;
+    }
+
+    p { margin-bottom: 1em; }
+    p:last-child { margin-bottom: 0; }
+
+    /* ── Links ───────────────────────────────────────────────────────── */
+    a {
+      color: var(--accent-link);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.15s;
+    }
+    a:hover { border-bottom-color: var(--accent-link); }
+
+    /* ── Plain list (no bullets, used for talks/contact) ─────────────── */
+    ul.plain {
+      list-style: none;
+      padding: 0;
+    }
+    ul.plain li {
+      padding: 0.2rem 0;
+    }
+
+    /* ── Bullet list (research areas) ────────────────────────────────── */
+    ul.bullet {
+      padding-left: 1.25rem;
+      margin-bottom: 1.25rem;
+    }
+    ul.bullet li {
+      margin-bottom: 0.4rem;
+    }
+
+    /* ── Profile link pills ──────────────────────────────────────────── */
+    .profile-links {
+      display: flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+      margin-top: 1.25rem;
+    }
+    .profile-links a {
+      font-size: 0.82rem;
+      padding: 0.25rem 0.7rem;
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      color: var(--muted);
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .profile-links a:hover {
+      border-color: var(--accent-link);
+      color: var(--accent-link);
+    }
+
+    /* ── Publications list ───────────────────────────────────────────── */
+    .pub-list {
+      list-style: none;
+      padding: 0;
+      margin-bottom: 1em;
+    }
+    .pub-list li {
+      padding: 0.65rem 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+    .pub-list li:first-child {
+      border-top: 1px solid var(--border);
+    }
+    .pub-year {
+      display: inline-block;
+      min-width: 2.8rem;
+      font-size: 0.78rem;
+      letter-spacing: 0.04em;
+      color: var(--muted);
+    }
+
+    /* ── Talks ───────────────────────────────────────────────────────── */
+    .talk-item {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+    .talk-item:first-of-type { border-top: 1px solid var(--border); }
+    .talk-meta {
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    /* ── Footer ──────────────────────────────────────────────────────── */
+    footer {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 1.5rem 2rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    /* ── Responsive ──────────────────────────────────────────────────── */
+    @media (max-width: 600px) {
+      nav ul { gap: 1.25rem; }
+      .page-header { padding: 3rem 1.25rem 2rem; }
+      .page-header h1 { font-size: 2rem; }
+      main { padding: 0 1.25rem 4rem; }
+      footer { padding: 1.5rem 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Navigation ──────────────────────────────────────────────────── -->
+  <nav>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#research">Research</a></li>
+      <li><a href="#publications">Publications</a></li>
+      <li><a href="#talks">Talks</a></li>
+      <li><a href="#teaching">Teaching</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- ── Page header ─────────────────────────────────────────────────── -->
+  <div class="page-header">
+    <h1>Robert Klement</h1>
+    <p class="subtitle">
+      <!-- UPDATE: your title and institution, e.g. "Postdoctoral Scholar · Caltech" -->
+      [Position] · [Institution] · Pasadena, CA
+    </p>
+    <span class="accent-rule"></span>
+  </div>
+
+  <main>
+
+    <!-- ── About ───────────────────────────────────────────────────────── -->
+    <section id="about">
+      <h2>About</h2>
+      <p>
+        <!-- UPDATE: write 2–3 sentences about yourself. Example below — edit freely. -->
+        I am a [position] at [Institution]. My research focuses on the observational
+        characterization of Be+sdOB binary star systems — interacting binaries consisting
+        of classical Be stars and hot, stripped subdwarf companions. I work with
+        spectroscopic, interferometric, and photometric observations to study mass
+        transfer histories, orbital dynamics, and circumstellar disk structure.
+      </p>
+      <p>
+        <!-- UPDATE: add your background / career history here -->
+        [Add a sentence about where you studied / previous positions / how you got here.]
+      </p>
+    </section>
+
+    <!-- ── Research ────────────────────────────────────────────────────── -->
+    <section id="research">
+      <h2>Research</h2>
+      <p>
+        My work spans several connected areas in observational stellar astrophysics,
+        with a particular focus on Be stars and their binary companions.
+        For refereed publications, see my profiles below.
+      </p>
+      <ul class="bullet">
+        <li>Be+sdOB Binary Star Systems (key targets: AN Col, φ Persei)</li>
+        <li>Optical Long-Baseline Interferometry (VLTI/GRAVITY, CHARA)</li>
+        <li>High-Resolution Spectroscopy &amp; Radial Velocities</li>
+        <li>Circumstellar Disk Modeling</li>
+        <li>Mass Transfer &amp; Binary Stellar Evolution</li>
+      </ul>
+      <div class="profile-links">
+        <a href="https://ui.adsabs.harvard.edu/search/q=author%3A%22klement%22&sort=date+desc%2C+bibcode+desc" target="_blank" rel="noopener">NASA ADS</a>
+        <!-- UPDATE: replace # with your actual ORCID URL, e.g. https://orcid.org/0000-0000-0000-0000 -->
+        <a href="#" target="_blank" rel="noopener">ORCID</a>
+        <!-- UPDATE: replace # with your Google Scholar URL -->
+        <a href="#" target="_blank" rel="noopener">Google Scholar</a>
+        <a href="https://github.com/robert-klement" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </section>
+
+    <!-- ── Publications ─────────────────────────────────────────────────── -->
+    <section id="publications">
+      <h2>Selected Publications</h2>
+      <ul class="pub-list">
+        <li>
+          <span class="pub-year">2025</span>
+          Lechien et al. (incl. Klement) &mdash;
+          <!-- UPDATE: add the paper title here -->
+          [Paper title].
+          <em>ApJL</em> 990, L51.
+          <a href="https://doi.org/10.3847/2041-8213/adcf9c" target="_blank" rel="noopener">ADS</a>
+        </li>
+        <!-- ADD more publications here, following the same pattern:
+        <li>
+          <span class="pub-year">20XX</span>
+          Author et al. &mdash; [Title]. <em>Journal</em> Vol, Page.
+          <a href="[ADS link]" target="_blank" rel="noopener">ADS</a>
+        </li>
+        -->
+      </ul>
+      <p style="font-size:0.9rem; color:var(--muted);">
+        Complete list on
+        <a href="https://ui.adsabs.harvard.edu/search/q=author%3A%22klement%22&sort=date+desc%2C+bibcode+desc">NASA ADS</a>.
+      </p>
+    </section>
+
+    <!-- ── Talks ────────────────────────────────────────────────────────── -->
+    <section id="talks">
+      <h2>Talks &amp; Presentations</h2>
+      <!-- UPDATE: add your talks. Duplicate the block below for each one. -->
+      <div class="talk-item">
+        <div>[Talk title]</div>
+        <div class="talk-meta">[Conference / Workshop] · [City, Country] · [Year]</div>
+      </div>
+      <div class="talk-item">
+        <div>[Talk title]</div>
+        <div class="talk-meta">[Conference / Workshop] · [City, Country] · [Year]</div>
+      </div>
+      <!-- Example real entry you can adapt:
+      <div class="talk-item">
+        <div>Characterizing Be+sdOB Binaries with Optical Interferometry</div>
+        <div class="talk-meta">238th AAS Meeting · Contributed Talk · Anchorage, AK · June 2021</div>
+      </div>
+      -->
+    </section>
+
+    <!-- ── Teaching ──────────────────────────────────────────────────────── -->
+    <section id="teaching">
+      <h2>Teaching</h2>
+      <!-- UPDATE: list any courses you have taught or TA'd -->
+      <ul class="plain">
+        <li>[Course name], [Institution] ([Year])</li>
+        <li>[Course name], [Institution] ([Year])</li>
+      </ul>
+    </section>
+
+    <!-- ── Contact ───────────────────────────────────────────────────────── -->
+    <section id="contact">
+      <h2>Contact</h2>
+      <ul class="plain">
+        <li>
+          Email:
+          <!-- UPDATE: replace with your email address -->
+          <a href="mailto:your.email@institution.edu">your.email@institution.edu</a>
+        </li>
+        <li>GitHub: <a href="https://github.com/robert-klement" target="_blank" rel="noopener">robert-klement</a></li>
+        <!-- UPDATE: add your mailing address if you'd like -->
+        <!-- <li>[Institution name]<br>[Department]<br>[Address]</li> -->
+      </ul>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>Robert Klement &middot; Last updated August 2026</p>
+  </footer>
+
+</body>
+</html>
