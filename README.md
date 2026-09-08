@@ -1,29 +1,22 @@
 # Robert Klement — Personal Website
 
-Academic personal website, structured similarly to [Daniel Huber's IFA page](https://home.ifa.hawaii.edu/users/dhuber/).
-
-Live at: **https://robert-klement.github.io** (after setup below)
+Academic personal website. Live at **https://robert-klement.github.io** after setup.
 
 ---
 
-## Setup: GitHub Pages (one-time, ~5 minutes)
+## One-time GitHub Pages setup (~5 min)
 
 ### 1. Create the repository
 
-Go to [github.com/new](https://github.com/new) and create a new repository named exactly:
-
+Go to [github.com/new](https://github.com/new) and create a repo named exactly:
 ```
 robert-klement.github.io
 ```
+Set it to **Public**. Do not initialize with a README.
 
-> **Important:** The repo name must be `<your-github-username>.github.io`.
-> Leave it **Public** (required for free GitHub Pages).
-> Do **not** initialize with a README.
-
-### 2. Push this site to the repository
+### 2. Push this folder
 
 From your terminal, inside this folder:
-
 ```bash
 git init
 git add .
@@ -33,55 +26,52 @@ git remote add origin https://github.com/robert-klement/robert-klement.github.io
 git push -u origin main
 ```
 
-### 3. Enable GitHub Pages
+GitHub Pages deploys automatically from the `main` branch. The site goes live within ~60 seconds.
 
-1. Go to your new repo on GitHub
-2. Click **Settings** → **Pages** (left sidebar)
-3. Under *Build and deployment*, set **Source** to `Deploy from a branch`
-4. Set **Branch** to `main`, folder to `/ (root)`
-5. Click **Save**
-
-Your site will be live at **https://robert-klement.github.io** within ~60 seconds.
-
----
-
-## Updating the site
-
-Edit `index.html` locally, then:
-
+### Every update after that:
 ```bash
-git add index.html
-git commit -m "Update [what you changed]"
+git add .
+git commit -m "describe what changed"
 git push
 ```
 
-GitHub Pages redeploys automatically on every push.
+---
+
+## Files in this repo
+
+| File | Purpose |
+|---|---|
+| `index.html` | The entire website (single file) |
+| `Robert_Klement_CV.pdf` | Linked from the "Download CV" button |
+| `photo.jpg` | **Add this yourself** — your profile photo |
+| `README.md` | This file |
 
 ---
 
-## What to fill in
+## Adding your photo
 
-Open `index.html` and search for `<!-- UPDATE` or `[brackets]` to find every placeholder:
+1. Add a photo of yourself to this folder, named **`photo.jpg`**
+2. Recommended: square crop, at least 200×200 px
+3. `git add photo.jpg && git commit -m "Add photo" && git push`
 
-| Placeholder | What to add |
-|---|---|
-| `[Position]` | e.g. *Postdoctoral Scholar* |
-| `[Institution]` | e.g. *Caltech* |
-| ORCID link | Your ORCID profile URL |
-| Google Scholar link | Your Scholar profile URL |
-| Email | your.name@institution.edu |
-| Publications | Add entries following the existing pattern |
-| Talks | Replace the placeholder blocks |
-| Teaching | List courses you've taught / TA'd |
-| Bio paragraph | 2–3 sentences about your background |
+The site shows your initials "RK" as a fallback if `photo.jpg` is missing.
+
+---
+
+## Keeping content up to date
+
+Open `index.html` and search for sections you want to update:
+
+- **Publications** — add entries following the existing `<li>` pattern; update the stat numbers in `.pub-stats` when your citation count changes
+- **Talks** — duplicate a `.ruled-item` block and fill in the details
+- **Teaching / Service** — same pattern
+- **CV** — replace `Robert_Klement_CV.pdf` with your updated file; keep the same filename, or update the `href` in the sidebar
 
 ---
 
 ## Optional: custom domain
 
-If you have a domain (e.g. `klement-astro.com`), you can point it to GitHub Pages:
-
-1. In your DNS provider, add a CNAME record pointing to `robert-klement.github.io`
-2. In GitHub repo → Settings → Pages, enter your custom domain
-
-GitHub handles HTTPS automatically.
+If you have a domain (e.g. `klement-astro.com`):
+1. Add a CNAME record in your DNS pointing to `robert-klement.github.io`
+2. In GitHub repo → Settings → Pages → enter your custom domain
+3. GitHub handles HTTPS automatically
