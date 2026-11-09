@@ -5,30 +5,66 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Robert Klement – Astrophysicist</title>
   <meta name="description" content="Robert Klement — astrophysicist working on massive binary stars, classical Be stars, and optical interferometry. PI of the PAVO Blue beam combiner project for the CHARA Array.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+  <meta name="color-scheme" content="light dark">
   <style>
-    /* Accent #7c3626 = Hα at 656 nm — the spectroscopic signature of Be stars */
+    /* ════════════════════════════════════════════════════════════════
+       Design tokens
+       Accent #7c3626 = Hα at 656 nm — the spectroscopic signature of Be stars
+       Blue #1f4fd1 = PAVO Blue (matches the proposal figures)
+       ════════════════════════════════════════════════════════════════ */
     :root {
       --bg:          #f8f7f3;
       --bg-sidebar:  #f1efe9;
+      --surface:     #ffffff;
       --text:        #1c1c28;
-      --accent:      #7c3626;
-      --accent-link: #9c4535;
-      --blue:        #1f4fd1;   /* PAVO Blue accent, matches the proposal figures */
-      --blue-soft:   #e9eefb;
+      --text-2:      #3a3a48;
       --muted:       #6b6b78;
       --border:      #ddd9d0;
-      --sidebar-w:   216px;
+      --accent:      #7c3626;
+      --accent-link: #9c4535;
+      --accent-soft: rgba(124,54,38,0.08);
+      --blue:        #1f4fd1;
+      --blue-soft:   #e9eefb;
+      --navy:        #0c1430;
+      --sidebar-w:   228px;
+      --serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+      --sans:  'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      /* Visible spectrum 400 → 800 nm; Hα (656 nm) sits at 64% */
+      --spectrum: linear-gradient(90deg,
+                    #6a2cff 0%, #2f4dff 12%, #00a8ff 23%, #00c98a 35%,
+                    #c9e000 46%, #ffb000 52%, #ff6a00 57%, #e81e00 64%,
+                    #a80000 80%, #3d0000 100%);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg:          #14141b;
+        --bg-sidebar:  #191922;
+        --surface:     #1f1f2a;
+        --text:        #ececf1;
+        --text-2:      #c9c9d3;
+        --muted:       #9a9aa8;
+        --border:      #2f2f3c;
+        --accent:      #e0806b;
+        --accent-link: #ee9a86;
+        --accent-soft: rgba(224,128,107,0.12);
+        --blue:        #7c9cff;
+        --blue-soft:   rgba(124,156,255,0.12);
+      }
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; font-size: 16px; }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-                   'Helvetica Neue', sans-serif;
-      line-height: 1.75;
+      font-family: var(--sans);
+      line-height: 1.7;
       background: var(--bg);
       color: var(--text);
+      -webkit-font-smoothing: antialiased;
     }
 
     .page-wrapper { display: flex; min-height: 100vh; }
@@ -37,93 +73,153 @@
     .sidebar {
       width: var(--sidebar-w);
       flex-shrink: 0;
-      position: sticky;
-      top: 0;
-      height: 100vh;
-      overflow-y: auto;
+      position: sticky; top: 0; height: 100vh; overflow-y: auto;
       background: var(--bg-sidebar);
       border-right: 1px solid var(--border);
-      display: flex;
-      flex-direction: column;
-      padding: 2.5rem 1.25rem 2rem;
-      gap: 1.5rem;
+      display: flex; flex-direction: column;
+      padding: 2.25rem 1.25rem 1.75rem;
+      gap: 1.4rem;
+    }
+    /* Thin spectrum stripe along the top of the sidebar */
+    .sidebar::before {
+      content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: var(--spectrum);
     }
 
     .profile-photo {
-      width: 90px; height: 90px;
-      border-radius: 50%; overflow: hidden;
+      width: 92px; height: 92px; border-radius: 50%; overflow: hidden;
       background: var(--accent);
       display: flex; align-items: center; justify-content: center;
       margin: 0 auto; flex-shrink: 0;
+      box-shadow: 0 0 0 3px var(--bg-sidebar), 0 0 0 4px var(--border);
     }
     .profile-photo img { width: 100%; height: 100%; object-fit: cover; }
     .photo-initials {
-      font-size: 1.6rem; font-weight: 700; color: #fff;
-      letter-spacing: -0.02em; line-height: 1;
+      font-family: var(--serif); font-size: 1.8rem; font-weight: 600; color: #fff;
+      line-height: 1;
     }
 
     .sidebar-id { text-align: center; line-height: 1.35; }
-    .sidebar-id h1 {
-      font-size: 0.95rem; font-weight: 700;
-      color: var(--text); margin-bottom: 0.3rem; letter-spacing: -0.01em;
+    .sidebar-id .sb-name {
+      font-family: var(--serif); font-size: 1.15rem; font-weight: 600;
+      color: var(--text); margin-bottom: 0.3rem;
     }
-    .sidebar-id .position { font-size: 0.78rem; font-weight: 500; color: var(--accent); }
+    .sidebar-id .position { font-size: 0.78rem; font-weight: 600; color: var(--accent); }
     .sidebar-id .institution { font-size: 0.76rem; color: var(--muted); margin-top: 0.15rem; }
     .sidebar-id .incoming {
-      font-size: 0.72rem; color: var(--muted); margin-top: 0.5rem;
-      padding-top: 0.5rem; border-top: 1px dashed var(--border);
+      font-size: 0.72rem; color: var(--muted); margin-top: 0.6rem;
+      padding-top: 0.6rem; border-top: 1px dashed var(--border);
     }
 
-    .sidebar-nav { display: flex; flex-direction: column; gap: 0.1rem; }
+    .sidebar-nav { display: flex; flex-direction: column; gap: 0.05rem; }
     .sidebar-nav a {
-      display: block; padding: 0.28rem 0.6rem;
-      font-size: 0.78rem; letter-spacing: 0.09em; text-transform: uppercase;
+      display: block; padding: 0.3rem 0.7rem;
+      font-size: 0.74rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
       color: var(--muted); text-decoration: none; border-bottom: none;
-      border-radius: 3px; transition: color 0.15s, background 0.15s;
+      border-left: 2px solid transparent; border-radius: 0 3px 3px 0;
+      transition: color 0.15s, background 0.15s, border-color 0.15s;
     }
-    .sidebar-nav a:hover { color: var(--accent); background: rgba(124,54,38,0.07); }
+    .sidebar-nav a:hover { color: var(--accent); background: var(--accent-soft); }
+    .sidebar-nav a.active { color: var(--accent); border-left-color: var(--accent); background: var(--accent-soft); }
     .sidebar-nav a.nav-pavo { color: var(--blue); font-weight: 600; }
-    .sidebar-nav a.nav-pavo:hover { color: var(--blue); background: var(--blue-soft); }
+    .sidebar-nav a.nav-pavo:hover,
+    .sidebar-nav a.nav-pavo.active { color: var(--blue); background: var(--blue-soft); border-left-color: var(--blue); }
 
-    .sidebar-links { display: flex; flex-direction: column; gap: 0.2rem; margin-top: auto; }
+    .sidebar-links { display: flex; flex-direction: column; gap: 0.15rem; margin-top: auto; }
     .sidebar-links a {
       display: flex; align-items: center; gap: 0.5rem;
       font-size: 0.78rem; color: var(--muted);
       text-decoration: none; border-bottom: none;
-      padding: 0.22rem 0.4rem; border-radius: 3px; transition: color 0.15s;
+      padding: 0.2rem 0.4rem; border-radius: 3px; transition: color 0.15s;
     }
     .sidebar-links a:hover { color: var(--accent); }
     .lnk-icon { width: 1rem; text-align: center; font-style: normal; }
 
     .cv-btn {
       display: block; text-align: center;
-      padding: 0.45rem 0.75rem;
-      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em;
+      padding: 0.5rem 0.75rem;
+      font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em;
       text-transform: uppercase; background: var(--accent); color: #fff;
-      border-radius: 3px; text-decoration: none; border-bottom: none;
-      transition: opacity 0.15s; margin-top: 0.5rem;
+      border: 1px solid var(--accent);
+      border-radius: 4px; text-decoration: none;
+      transition: opacity 0.15s, transform 0.15s; margin-top: 0.5rem;
     }
-    .cv-btn:hover { opacity: 0.88; border-bottom: none; }
-    .cv-btn.secondary {
-      background: transparent; color: var(--accent);
-      border: 1px solid var(--accent); margin-top: 0.4rem;
-    }
+    .cv-btn:hover { opacity: 0.9; border-bottom-color: var(--accent); transform: translateY(-1px); }
+    .cv-btn.secondary { background: transparent; color: var(--accent); margin-top: 0.4rem; }
 
     /* ── Main content ──────────────────────────────────────────────── */
     .content-col { flex: 1; min-width: 0; display: flex; flex-direction: column; }
-    main { flex: 1; padding: 3rem 3.5rem 4rem; max-width: 900px; }
+    main { flex: 1; padding: 3.5rem 3.5rem 4rem; max-width: 920px; }
 
-    section { padding-top: 3rem; padding-bottom: 0.5rem; }
-    section + section { border-top: 1px solid var(--border); }
+    /* ── Hero header ───────────────────────────────────────────────── */
+    .hero { padding-bottom: 2.75rem; }
+    .eyebrow {
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--muted); margin-bottom: 0.6rem;
+    }
+    .hero-name {
+      font-family: var(--serif); font-weight: 600;
+      font-size: clamp(2.3rem, 5vw, 3.4rem); line-height: 1.05;
+      letter-spacing: -0.015em; margin-bottom: 1rem;
+    }
+    .hero-lede {
+      font-family: var(--serif); font-size: 1.2rem; line-height: 1.55;
+      color: var(--text-2); max-width: 40rem; margin-bottom: 1.6rem;
+    }
+    .hero-lede em { color: var(--accent); font-style: italic; }
+
+    /* Spectrum bar with an Hα tick */
+    .spectrum-bar { position: relative; margin: 2.4rem 0 1.75rem; max-width: 40rem; }
+    .spectrum-bar .bar { height: 6px; border-radius: 3px; background: var(--spectrum); }
+    .spectrum-bar .ticks {
+      display: flex; justify-content: space-between;
+      font-size: 0.66rem; color: var(--muted); margin-top: 0.3rem; letter-spacing: 0.04em;
+    }
+    .spectrum-bar .ha {
+      position: absolute; left: 64%; top: -5px; height: 16px; width: 2px;
+      background: var(--text); border-radius: 1px;
+    }
+    .spectrum-bar .ha span {
+      position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%);
+      white-space: nowrap; font-size: 0.68rem; font-weight: 600; color: var(--accent);
+    }
+
+    .hero-facts { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .fact {
+      display: inline-flex; align-items: center; gap: 0.45rem;
+      font-size: 0.8rem; color: var(--text-2);
+      padding: 0.35rem 0.75rem; border: 1px solid var(--border);
+      background: var(--surface); border-radius: 999px;
+    }
+    .fact .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+    .fact.blue .dot { background: var(--blue); }
+    .fact.grey .dot { background: var(--muted); }
+    a.fact { border-bottom: 1px solid var(--border); }
+    a.fact:hover { border-color: var(--blue); color: var(--blue); }
+
+    /* ── Sections & headings ───────────────────────────────────────── */
+    main { counter-reset: sec; }
+    section { padding-top: 3.25rem; padding-bottom: 0.75rem; border-top: 1px solid var(--border); scroll-margin-top: 1rem; }
 
     h2 {
-      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.18em;
-      text-transform: uppercase; color: var(--accent); margin-bottom: 1.25rem;
+      font-family: var(--serif); font-size: 1.75rem; font-weight: 600;
+      letter-spacing: -0.01em; line-height: 1.2;
+      color: var(--text); margin-bottom: 1.25rem;
+      display: flex; align-items: baseline; gap: 0.75rem;
+    }
+    /* Auto-numbered section labels: 01, 02, ... */
+    h2::before {
+      counter-increment: sec;
+      content: counter(sec, decimal-leading-zero);
+      font-family: var(--sans); font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.1em; color: var(--accent);
+      padding: 0.1rem 0.4rem; border: 1px solid var(--accent); border-radius: 3px;
+      transform: translateY(-0.3em);
     }
     h3 {
-      font-size: 0.78rem; font-weight: 600; letter-spacing: 0.1em;
+      font-size: 0.74rem; font-weight: 600; letter-spacing: 0.12em;
       text-transform: uppercase; color: var(--muted);
-      margin-top: 2rem; margin-bottom: 0.75rem;
+      margin-top: 2.25rem; margin-bottom: 0.85rem;
     }
 
     p { margin-bottom: 1em; }
@@ -131,180 +227,273 @@
 
     a {
       color: var(--accent-link); text-decoration: none;
-      border-bottom: 1px solid transparent; transition: border-color 0.15s;
+      border-bottom: 1px solid transparent; transition: border-color 0.15s, color 0.15s;
     }
     a:hover { border-bottom-color: var(--accent-link); }
 
     ul.bullet { padding-left: 1.25rem; margin-bottom: 1.25rem; }
     ul.bullet li { margin-bottom: 0.35rem; }
+    ul.bullet li::marker { color: var(--accent); }
     ul.plain { list-style: none; padding: 0; }
     ul.plain li { padding: 0.2rem 0; }
 
     /* ── PAVO Blue feature ─────────────────────────────────────────── */
-    #pavo-blue h2 { color: var(--blue); }
+    #pavo-blue h2::before { color: var(--blue); border-color: var(--blue); }
+    #pavo-blue h3 { color: var(--blue); }
+
     .pavo-hero {
-      background: linear-gradient(135deg, #f3f6fe 0%, #e4ebfb 100%);
-      border: 1px solid #c9d5f3; border-left: 4px solid var(--blue);
-      border-radius: 4px; padding: 1.5rem 1.75rem; margin-bottom: 1.75rem;
+      position: relative; overflow: hidden;
+      background:
+        radial-gradient(ellipse at 85% 0%, rgba(80,120,255,0.35) 0%, transparent 55%),
+        radial-gradient(ellipse at 0% 100%, rgba(120,60,255,0.25) 0%, transparent 50%),
+        var(--navy);
+      color: #e8ecff;
+      border-radius: 10px; padding: 2rem 2rem 2.4rem; margin-bottom: 2rem;
     }
+    /* A few faint 'stars' painted with radial gradients */
+    .pavo-hero::before {
+      content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0.55;
+      background-image:
+        radial-gradient(1.2px 1.2px at 12% 22%, #fff 50%, transparent 51%),
+        radial-gradient(1px 1px at 33% 68%, #fff 50%, transparent 51%),
+        radial-gradient(1.5px 1.5px at 58% 14%, #fff 50%, transparent 51%),
+        radial-gradient(1px 1px at 72% 52%, #fff 50%, transparent 51%),
+        radial-gradient(1.3px 1.3px at 88% 78%, #fff 50%, transparent 51%),
+        radial-gradient(1px 1px at 46% 88%, #fff 50%, transparent 51%),
+        radial-gradient(1px 1px at 93% 30%, #fff 50%, transparent 51%);
+    }
+    /* Spectrum strip at the bottom: 400–800 nm, the PAVO Blue band */
+    .pavo-hero::after {
+      content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 5px;
+      background: var(--spectrum);
+    }
+    .pavo-hero > * { position: relative; }
     .pavo-hero .kicker {
-      font-size: 0.68rem; font-weight: 600; letter-spacing: 0.14em;
-      text-transform: uppercase; color: var(--blue); margin-bottom: 0.35rem;
+      font-size: 0.7rem; font-weight: 600; letter-spacing: 0.16em;
+      text-transform: uppercase; color: #9fb4ff; margin-bottom: 0.5rem;
     }
     .pavo-hero .title {
-      font-size: 1.45rem; font-weight: 700; line-height: 1.25;
-      letter-spacing: -0.01em; margin-bottom: 0.6rem;
+      font-family: var(--serif); font-size: 1.85rem; font-weight: 600; line-height: 1.2;
+      color: #fff; margin-bottom: 0.9rem; max-width: 34rem;
     }
-    .pavo-hero p { font-size: 0.96rem; }
+    .pavo-hero p { font-size: 0.95rem; color: #d3daf5; }
+    .pavo-hero p.team { font-size: 0.84rem; color: #9aa6cc; margin-top: 0.75rem; }
+    .pavo-hero em { color: #fff; }
     .pill {
-      display: inline-block; font-size: 0.7rem; font-weight: 600;
-      letter-spacing: 0.06em; text-transform: uppercase;
-      padding: 0.15rem 0.55rem; border-radius: 999px;
-      background: var(--blue); color: #fff; margin: 0 0.3rem 0.5rem 0;
+      display: inline-block; font-size: 0.68rem; font-weight: 600;
+      letter-spacing: 0.07em; text-transform: uppercase;
+      padding: 0.2rem 0.65rem; border-radius: 999px;
+      background: #3e6bff; color: #fff; margin: 0 0.35rem 0.9rem 0;
     }
-    .pill.outline { background: transparent; color: var(--blue); border: 1px solid var(--blue); }
+    .pill.outline { background: rgba(255,255,255,0.06); color: #c6d2ff; border: 1px solid rgba(198,210,255,0.4); }
 
     .goals {
       display: grid; grid-template-columns: repeat(2, 1fr);
-      gap: 0.75rem; margin: 0.5rem 0 1.5rem;
+      gap: 0.85rem; margin: 0.5rem 0 1.5rem;
     }
     .goal {
-      background: #fff; border: 1px solid var(--border); border-radius: 4px;
-      padding: 1rem 1.1rem;
+      --band: var(--blue);
+      background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
+      padding: 1.1rem 1.2rem 1.15rem; position: relative; overflow: hidden;
+      transition: transform 0.15s, box-shadow 0.15s;
     }
+    .goal:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(20,30,80,0.08); }
+    .goal::before { content: ""; position: absolute; left: 0; top: 0; right: 0; height: 4px; background: var(--band); }
+    /* Each goal card is colour-coded by a wavelength in the PAVO Blue band */
+    .goal:nth-child(1) { --band: var(--spectrum); }
+    .goal:nth-child(2) { --band: #6a2cff; }   /* 400 nm */
+    .goal:nth-child(3) { --band: #00a8ff; }   /* 490 nm */
+    .goal:nth-child(4) { --band: #00c98a; }   /* 540 nm */
     .goal .num {
-      font-size: 0.68rem; font-weight: 700; color: var(--blue);
-      letter-spacing: 0.1em; text-transform: uppercase;
+      font-size: 0.66rem; font-weight: 700; color: var(--muted);
+      letter-spacing: 0.12em; text-transform: uppercase;
     }
     .goal .big {
-      font-size: 1.35rem; font-weight: 700; line-height: 1.2;
-      margin: 0.2rem 0 0.35rem; color: var(--text);
+      font-family: var(--serif); font-size: 1.55rem; font-weight: 600; line-height: 1.2;
+      margin: 0.25rem 0 0.4rem; color: var(--text);
     }
-    .goal .desc { font-size: 0.86rem; line-height: 1.55; color: #3a3a48; }
+    .goal .desc { font-size: 0.86rem; line-height: 1.55; color: var(--text-2); }
 
-    .fig-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin: 1rem 0 1.5rem; }
-    figure { margin: 0 0 1.5rem; }
+    /* Figures: always on a white card so the plots stay legible in dark mode */
+    .fig-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin: 1.25rem 0 1.75rem; }
+    figure { margin: 0 0 1.75rem; }
     .fig-grid figure { margin: 0; }
-    figure a { border-bottom: none; display: block; }
+    figure a { border-bottom: none; display: block; cursor: zoom-in; }
     figure a:hover { border-bottom: none; }
     figure img {
       width: 100%; height: auto; display: block;
-      background: #fff; border: 1px solid var(--border); border-radius: 3px;
-      padding: 0.5rem; transition: box-shadow 0.15s;
+      background: #fff; border: 1px solid var(--border); border-radius: 8px;
+      padding: 0.6rem; transition: box-shadow 0.2s, transform 0.2s;
     }
-    figure a:hover img { box-shadow: 0 2px 12px rgba(31,79,209,0.15); }
-    figcaption { font-size: 0.8rem; line-height: 1.5; color: var(--muted); margin-top: 0.5rem; }
+    figure a:hover img { box-shadow: 0 8px 24px rgba(31,79,209,0.14); transform: translateY(-2px); }
+    figcaption { font-size: 0.8rem; line-height: 1.55; color: var(--muted); margin-top: 0.6rem; }
     figcaption strong { color: var(--text); font-weight: 600; }
 
     .design-card {
-      display: grid; grid-template-columns: 1.3fr 1fr; gap: 1.25rem;
-      align-items: center; background: #fff; border: 1px solid var(--border);
-      border-radius: 4px; padding: 1rem; margin: 1rem 0 1.5rem;
+      display: grid; grid-template-columns: 1.3fr 1fr; gap: 1.5rem;
+      align-items: center; background: var(--surface); border: 1px solid var(--border);
+      border-radius: 10px; padding: 1.1rem; margin: 1.25rem 0 1.75rem;
     }
-    .design-card img { width: 100%; height: auto; display: block; border: 1px solid var(--border); border-radius: 2px; }
+    .design-card img { width: 100%; height: auto; display: block; border: 1px solid var(--border); border-radius: 6px; background: #fff; transition: transform 0.2s; }
     .design-card a.thumb { border-bottom: none; }
-    .design-card .dc-title { font-weight: 600; margin-bottom: 0.35rem; }
-    .design-card p { font-size: 0.88rem; line-height: 1.6; }
+    .design-card a.thumb:hover img { transform: scale(1.015); }
+    .design-card .dc-title { font-family: var(--serif); font-size: 1.15rem; font-weight: 600; margin-bottom: 0.4rem; }
+    .design-card p { font-size: 0.87rem; line-height: 1.6; color: var(--text-2); }
     .btn-blue {
-      display: inline-block; margin-top: 0.75rem; padding: 0.4rem 0.8rem;
-      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
-      background: var(--blue); color: #fff; border-radius: 3px; border-bottom: none;
+      display: inline-block; margin-top: 0.9rem; padding: 0.5rem 0.9rem;
+      font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+      background: var(--blue); color: #fff; border-radius: 4px; border-bottom: none;
+      transition: transform 0.15s, opacity 0.15s;
     }
-    .btn-blue:hover { opacity: 0.9; border-bottom: none; }
+    .btn-blue:hover { opacity: 0.92; border-bottom: none; transform: translateY(-1px); }
 
-    .timeline-mini { list-style: none; padding: 0; margin: 0.5rem 0 1rem; }
+    .timeline-mini { list-style: none; padding: 0; margin: 0.5rem 0 1rem; position: relative; }
     .timeline-mini li {
-      padding: 0.45rem 0 0.45rem 1rem; border-left: 2px solid #c9d5f3;
+      position: relative; padding: 0.5rem 0 0.5rem 1.6rem;
       font-size: 0.92rem; line-height: 1.55;
+    }
+    .timeline-mini li::before {
+      content: ""; position: absolute; left: 0.3rem; top: 0; bottom: 0; width: 2px; background: var(--blue-soft);
+    }
+    .timeline-mini li::after {
+      content: ""; position: absolute; left: 0; top: 0.95rem; width: 10px; height: 10px;
+      border-radius: 50%; background: var(--surface); border: 2px solid var(--blue);
     }
     .timeline-mini li strong { color: var(--blue); }
 
     /* ── Pub stats ─────────────────────────────────────────────────── */
     .pub-stats {
       display: grid; grid-template-columns: repeat(4, 1fr);
-      gap: 0.65rem; margin-bottom: 1.5rem;
+      gap: 0.75rem; margin-bottom: 1.5rem;
     }
     .stat-box {
-      padding: 0.75rem 0.9rem; border: 1px solid var(--border);
-      border-radius: 3px; background: #fff;
+      padding: 1rem 1rem 0.9rem; border: 1px solid var(--border);
+      border-radius: 8px; background: var(--surface); position: relative; overflow: hidden;
     }
-    .stat-number { font-size: 1.5rem; font-weight: 700; color: var(--text); line-height: 1; }
-    .stat-label { font-size: 0.7rem; color: var(--muted); margin-top: 0.28rem; line-height: 1.3; }
+    .stat-box::after {
+      content: ""; position: absolute; left: 0; bottom: 0; height: 3px; width: 100%;
+      background: var(--accent); opacity: 0.8;
+    }
+    .stat-number { font-family: var(--serif); font-size: 2rem; font-weight: 600; color: var(--text); line-height: 1; }
+    .stat-label { font-size: 0.7rem; color: var(--muted); margin-top: 0.4rem; line-height: 1.3; text-transform: uppercase; letter-spacing: 0.08em; }
 
     /* ── Publication list ──────────────────────────────────────────── */
-    .pub-toolbar { display: flex; flex-wrap: wrap; gap: 0.4rem; align-items: center; margin: 0.5rem 0 0.75rem; }
-    .pub-toolbar button {
-      font: inherit; font-size: 0.74rem; letter-spacing: 0.06em; text-transform: uppercase;
-      padding: 0.3rem 0.7rem; border: 1px solid var(--border); border-radius: 3px;
-      background: #fff; color: var(--muted); cursor: pointer;
+    .pub-toolbar { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; margin: 0.75rem 0 1rem; }
+    .seg { display: inline-flex; border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
+    .seg button {
+      font: inherit; font-size: 0.74rem; font-weight: 500; letter-spacing: 0.04em;
+      padding: 0.4rem 0.8rem; border: none; background: var(--surface); color: var(--muted); cursor: pointer;
     }
-    .pub-toolbar button.active { background: var(--accent); border-color: var(--accent); color: #fff; }
-    .pub-toolbar .spacer { flex: 1; }
-    .pub-toolbar a { font-size: 0.8rem; }
+    .seg button + button { border-left: 1px solid var(--border); }
+    .seg button.active { background: var(--accent); color: #fff; }
+    .pub-search {
+      flex: 1; min-width: 160px; font: inherit; font-size: 0.85rem;
+      padding: 0.4rem 0.75rem; border: 1px solid var(--border); border-radius: 6px;
+      background: var(--surface); color: var(--text);
+    }
+    .pub-search:focus { outline: 2px solid var(--accent-soft); border-color: var(--accent); }
+    .pub-toolbar a { font-size: 0.8rem; white-space: nowrap; }
+    .pub-empty { display: none; font-size: 0.9rem; color: var(--muted); padding: 1rem 0; }
 
     .pub-list { list-style: none; padding: 0; margin-bottom: 1em; }
     .pub-list li {
-      padding: 0.7rem 0; border-bottom: 1px solid var(--border);
-      font-size: 0.92rem; line-height: 1.55;
+      padding: 0.85rem 0.9rem; border-bottom: 1px solid var(--border);
+      font-size: 0.92rem; line-height: 1.55; border-left: 3px solid transparent;
+      transition: background 0.15s;
     }
     .pub-list li:first-child { border-top: 1px solid var(--border); }
-    .pub-list li.first-author { border-left: 3px solid var(--accent); padding-left: 0.75rem; }
-    .pub-list .pub-title { font-weight: 600; display: block; }
-    .pub-list .pub-authors { display: block; color: #3a3a48; font-size: 0.86rem; }
-    .pub-list .pub-authors b { color: var(--accent); }
+    .pub-list li:hover { background: var(--accent-soft); }
+    .pub-list li.first-author { border-left-color: var(--accent); }
+    .pub-list .pub-title { font-weight: 600; display: block; color: var(--text); }
+    .pub-list .pub-authors { display: block; color: var(--text-2); font-size: 0.85rem; }
+    .pub-list .pub-authors b { color: var(--accent); font-weight: 600; }
     .pub-list .pub-meta { display: block; font-size: 0.8rem; color: var(--muted); }
     .pub-list.only-first li:not(.first-author) { display: none; }
+    .pub-list li.no-match { display: none; }
 
     /* ── Ruled items / CV ──────────────────────────────────────────── */
     .ruled-item {
-      padding: 0.55rem 0; border-bottom: 1px solid var(--border);
+      padding: 0.7rem 0; border-bottom: 1px solid var(--border);
       font-size: 0.94rem; line-height: 1.6;
     }
     .ruled-item:first-of-type { border-top: 1px solid var(--border); }
     .item-meta { font-size: 0.8rem; color: var(--muted); }
-    .item-detail { font-size: 0.86rem; color: #3a3a48; margin-top: 0.2rem; }
+    .item-detail { font-size: 0.86rem; color: var(--text-2); margin-top: 0.2rem; }
     .item-detail ul { padding-left: 1.1rem; }
     .badge-upcoming {
-      display: inline-block; font-size: 0.66rem; font-weight: 600;
-      letter-spacing: 0.07em; text-transform: uppercase;
-      padding: 0.1rem 0.42rem; border-radius: 2px; margin-right: 0.3rem;
-      vertical-align: middle; background: transparent;
-      color: var(--muted); border: 1px solid var(--border);
+      display: inline-block; font-size: 0.62rem; font-weight: 700;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 0.08rem 0.45rem; border-radius: 3px; margin-right: 0.4rem;
+      vertical-align: 0.1em; background: transparent;
+      color: var(--blue); border: 1px solid var(--blue);
     }
     .badge-upcoming.now { color: var(--accent); border-color: var(--accent); }
 
     .cv-row { display: grid; grid-template-columns: 8.5rem 1fr; gap: 1rem; }
-    .cv-date { font-size: 0.8rem; color: var(--muted); padding-top: 0.1rem; }
+    .cv-date { font-size: 0.8rem; color: var(--muted); padding-top: 0.15rem; font-variant-numeric: tabular-nums; }
 
     footer {
-      padding: 1.25rem 3.5rem; border-top: 1px solid var(--border);
+      padding: 1.5rem 3.5rem; border-top: 1px solid var(--border);
       font-size: 0.78rem; color: var(--muted);
+      display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem;
+    }
+    footer a { color: var(--muted); }
+
+    /* ── Lightbox (click a figure to enlarge) ──────────────────────── */
+    .lightbox {
+      position: fixed; inset: 0; z-index: 100; display: none;
+      background: rgba(8,10,20,0.88); padding: 2rem;
+      align-items: center; justify-content: center; flex-direction: column; gap: 1rem;
+      cursor: zoom-out;
+    }
+    .lightbox.open { display: flex; }
+    .lightbox img {
+      max-width: min(1300px, 100%); max-height: 80vh; width: auto; height: auto;
+      background: #fff; border-radius: 8px; padding: 0.75rem;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+    .lightbox .lb-caption { max-width: 900px; color: #d8dcea; font-size: 0.88rem; line-height: 1.55; text-align: center; }
+    .lightbox .lb-caption strong { color: #fff; }
+    .lightbox .lb-close {
+      position: absolute; top: 1rem; right: 1.25rem; font-size: 1.8rem; line-height: 1;
+      color: #fff; background: none; border: none; cursor: pointer; opacity: 0.8;
     }
 
     /* ── Responsive ────────────────────────────────────────────────── */
     @media (max-width: 900px) {
       .fig-grid, .design-card { grid-template-columns: 1fr; }
     }
-    @media (max-width: 700px) {
+    @media (max-width: 760px) {
       .page-wrapper { flex-direction: column; }
       .sidebar {
-        width: 100%; height: auto; position: static;
+        width: 100%; height: auto; position: relative;
         flex-direction: row; flex-wrap: wrap; align-items: center;
-        padding: 1rem 1rem; gap: 0.75rem;
+        padding: 1.1rem 1rem; gap: 0.75rem;
         border-right: none; border-bottom: 1px solid var(--border);
       }
-      .profile-photo { width: 52px; height: 52px; flex-shrink: 0; margin: 0; }
-      .photo-initials { font-size: 1.1rem; }
-      .sidebar-id { text-align: left; flex: 1; min-width: 120px; }
+      .profile-photo { width: 52px; height: 52px; margin: 0; }
+      .photo-initials { font-size: 1.15rem; }
+      .sidebar-id { text-align: left; flex: 1; min-width: 140px; }
+      .sidebar-id .incoming { display: none; }
       .sidebar-nav { flex-direction: row; flex-wrap: wrap; width: 100%; gap: 0.15rem; }
+      .sidebar-nav a { border-left: none; border-radius: 3px; padding: 0.25rem 0.5rem; }
       .sidebar-links { flex-direction: row; flex-wrap: wrap; width: 100%; margin-top: 0; }
-      .cv-btn { width: auto; margin-top: 0; }
-      main { padding: 1.5rem 1rem 3rem; }
-      footer { padding: 1rem 1rem; }
+      .sidebar > div:last-child { display: flex; gap: 0.5rem; width: 100%; }
+      .cv-btn, .cv-btn.secondary { flex: 1; margin-top: 0; }
+      main { padding: 2rem 1rem 3rem; }
+      footer { padding: 1rem; }
       .pub-stats { grid-template-columns: repeat(2, 1fr); }
       .goals { grid-template-columns: 1fr; }
-      .pavo-hero { padding: 1.25rem 1.1rem; }
+      .pavo-hero { padding: 1.5rem 1.2rem 1.9rem; }
+      .pavo-hero .title { font-size: 1.5rem; }
       .cv-row { grid-template-columns: 1fr; gap: 0; }
+      h2 { font-size: 1.5rem; }
+      .hero-lede { font-size: 1.08rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      * { transition: none !important; }
     }
   </style>
 </head>
@@ -319,7 +508,7 @@
       <span class="photo-initials" style="display:none">RK</span>
     </div>
     <div class="sidebar-id">
-      <h1>Robert Klement</h1>
+      <p class="sb-name">Robert Klement</p>
       <p class="position">ESO Research Fellow</p>
       <p class="institution">CHARA Array &middot; Mount Wilson, CA</p>
       <p class="incoming">From 15 Nov 2026:<br>Postdoctoral Researcher,<br>Georgia State University</p>
@@ -351,8 +540,29 @@
   <div class="content-col">
     <main>
 
+      <!-- ═══════════════════ Hero header ═══════════════════ -->
+      <header class="hero">
+        <p class="eyebrow">Astrophysics &middot; Optical interferometry &middot; Massive binaries</p>
+        <h1 class="hero-name">Robert Klement</h1>
+        <p class="hero-lede">I study how binary interaction shapes the lives of massive stars, especially <em>classical Be stars</em> and their stripped companions, using the longest-baseline optical interferometers in the world.</p>
+
+        <!-- Visible spectrum, 400–800 nm, with the Hα line marked -->
+        <div class="spectrum-bar" aria-hidden="true">
+          <div class="bar"></div>
+          <div class="ha"><span>H&alpha; 656 nm</span></div>
+          <div class="ticks"><span>400 nm</span><span>500</span><span>600</span><span>700</span><span>800 nm</span></div>
+        </div>
+
+        <div class="hero-facts">
+          <span class="fact"><span class="dot"></span>ESO Research Fellow &middot; CHARA Array</span>
+          <span class="fact grey"><span class="dot"></span>Georgia State University from Nov 2026</span>
+          <a class="fact blue" href="#pavo-blue"><span class="dot"></span>PI &middot; PAVO Blue (NSF ATI)</a>
+          <a class="fact" href="#publications"><span class="dot"></span>33 papers &middot; h-index 16</a>
+        </div>
+      </header>
+
       <!-- ═══════════════════ About ═══════════════════ -->
-      <section id="about" style="padding-top:0">
+      <section id="about">
         <h2>About</h2>
         <p>I am an astrophysicist working on massive binary stars and optical long-baseline interferometry. I am currently a Research Fellow at the European Southern Observatory (ESO), stationed for the 4th year of my Fellowship at the <a href="https://www.chara.gsu.edu/" target="_blank" rel="noopener">CHARA Array</a> on Mount Wilson, California, and affiliated with Nice Observatory for support of the SPICA instrument. From <strong>15 November 2026</strong> I will join <strong>Georgia State University</strong> as a Postdoctoral Researcher.</p>
         <p>During the first three years of the Fellowship (2022&ndash;2025) I split my time between independent research and observatory duties at Paranal, serving as MATISSE and then GRAVITY Instrument Fellow at the VLTI. Before joining ESO, I was a Postdoctoral Research Associate at CHARA / Georgia State University (2017&ndash;2022). I earned my Ph.D. in Astrophysics from Charles University in Prague in 2017, jointly with ESO Santiago.</p>
@@ -372,7 +582,7 @@
             <span class="pill outline">400&ndash;800 nm</span>
           </div>
           <p>I am leading, as Principal Investigator, a funding proposal to the NSF <em>Advanced Technologies and Instrumentation</em> (ATI) program to build PAVO Blue at the CHARA Array. It is a new beam combiner based on the proven PAVO design, built around state-of-the-art EMCCD cameras. No long-baseline interferometric beam combiner in the world currently operates shortward of 600&nbsp;nm. Combined with CHARA&rsquo;s 331&nbsp;m baselines, PAVO Blue will deliver the finest angular resolution of any optical interferometer.</p>
-          <p style="font-size:0.86rem;color:var(--muted)">Team: R. Klement (PI), J. D. Monnier (U. Michigan), N. Anugu and D. R. Gies (CHARA / Georgia State University).</p>
+          <p class="team">Team: R. Klement (PI), J. D. Monnier (U. Michigan), N. Anugu and D. R. Gies (CHARA / Georgia State University).</p>
         </div>
 
         <h3>Four main goals</h3>
@@ -553,11 +763,14 @@
         <p style="font-size:0.88rem;color:var(--muted)">From NASA/ADS, November 2026. Also on <a href="https://ui.adsabs.harvard.edu/search/q=orcid%3A0000-0002-4313-0169&sort=date+desc%2C+bibcode+desc" target="_blank" rel="noopener">NASA ADS</a> and <a href="https://orcid.org/0000-0002-4313-0169" target="_blank" rel="noopener">ORCID</a>.</p>
 
         <div class="pub-toolbar">
-          <button type="button" id="btn-first" class="active" onclick="showPubs(true)">First-author (10)</button>
-          <button type="button" id="btn-all" onclick="showPubs(false)">All (33)</button>
-          <span class="spacer"></span>
-          <a href="Robert_Klement_publications.pdf" target="_blank">Publication list (PDF)</a>
+          <div class="seg">
+            <button type="button" id="btn-first" class="active" onclick="showPubs(true)">First-author (10)</button>
+            <button type="button" id="btn-all" onclick="showPubs(false)">All (33)</button>
+          </div>
+          <input type="search" class="pub-search" id="pub-search" placeholder="Search title, author, journal, year…" oninput="searchPubs(this.value)">
+          <a href="Robert_Klement_publications.pdf" target="_blank">PDF list &darr;</a>
         </div>
+        <p class="pub-empty" id="pub-empty">No papers match that search.</p>
 
         <ul class="pub-list only-first" id="pub-list">
           <li>
@@ -817,19 +1030,87 @@
       </section>
 
     </main>
-    <footer>Robert Klement &middot; Last updated November 2026</footer>
+    <footer>
+      <span>Robert Klement &middot; Last updated November 2026</span>
+      <a href="#">Back to top &uarr;</a>
+    </footer>
   </div>
 
 </div>
 
+<!-- Lightbox overlay for enlarged figures (filled in by the script below) -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Enlarged figure">
+  <button class="lb-close" type="button" aria-label="Close">&times;</button>
+  <img id="lb-img" src="" alt="">
+  <div class="lb-caption" id="lb-caption"></div>
+</div>
+
 <script>
-  // Toggle between first-author papers only and the full publication list
+  // ── Publications: first-author / all toggle ─────────────────────────
   function showPubs(firstOnly) {
     const list = document.getElementById('pub-list');
     list.classList.toggle('only-first', firstOnly);
     document.getElementById('btn-first').classList.toggle('active', firstOnly);
     document.getElementById('btn-all').classList.toggle('active', !firstOnly);
   }
+
+  // ── Publications: free-text search (searches all papers) ────────────
+  function searchPubs(query) {
+    const words = query.toLowerCase().trim();
+    const items = document.querySelectorAll('#pub-list li');
+    if (words !== '') {
+      showPubs(false);   // a search should look through every paper
+    }
+    let visibleCount = 0;
+    items.forEach(function (item) {
+      const matches = item.textContent.toLowerCase().includes(words);
+      item.classList.toggle('no-match', !matches);
+      if (matches) { visibleCount += 1; }
+    });
+    document.getElementById('pub-empty').style.display = visibleCount === 0 ? 'block' : 'none';
+  }
+
+  // ── Lightbox: clicking a figure shows it enlarged with its caption ──
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImage = document.getElementById('lb-img');
+  const lightboxCaption = document.getElementById('lb-caption');
+
+  document.querySelectorAll('figure a').forEach(function (link) {
+    link.addEventListener('click', function (event) {
+      event.preventDefault();
+      const figure = link.closest('figure');
+      const caption = figure.querySelector('figcaption');
+      lightboxImage.src = link.getAttribute('href');
+      lightboxImage.alt = link.querySelector('img').alt;
+      lightboxCaption.innerHTML = caption ? caption.innerHTML : '';
+      lightbox.classList.add('open');
+    });
+  });
+
+  function closeLightbox() {
+    lightbox.classList.remove('open');
+    lightboxImage.src = '';
+  }
+  lightbox.addEventListener('click', closeLightbox);
+  document.addEventListener('keydown', function (event) {
+    if (event.key === 'Escape') { closeLightbox(); }
+  });
+
+  // ── Sidebar: highlight the section currently on screen ──────────────
+  const navLinks = document.querySelectorAll('.sidebar-nav a');
+  const observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        navLinks.forEach(function (link) {
+          const isCurrent = link.getAttribute('href') === '#' + entry.target.id;
+          link.classList.toggle('active', isCurrent);
+        });
+      }
+    });
+  }, { rootMargin: '-35% 0px -60% 0px' });
+  document.querySelectorAll('main section').forEach(function (section) {
+    observer.observe(section);
+  });
 </script>
 </body>
 </html>
