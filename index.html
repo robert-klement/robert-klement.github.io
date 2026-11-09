@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Robert Klement – Astrophysicist</title>
+  <meta name="description" content="Robert Klement — astrophysicist working on massive binary stars, classical Be stars, and optical interferometry. PI of the PAVO Blue beam combiner project for the CHARA Array.">
   <style>
     /* Accent #7c3626 = Hα at 656 nm — the spectroscopic signature of Be stars */
     :root {
@@ -12,6 +13,8 @@
       --text:        #1c1c28;
       --accent:      #7c3626;
       --accent-link: #9c4535;
+      --blue:        #1f4fd1;   /* PAVO Blue accent, matches the proposal figures */
+      --blue-soft:   #e9eefb;
       --muted:       #6b6b78;
       --border:      #ddd9d0;
       --sidebar-w:   216px;
@@ -66,6 +69,10 @@
     }
     .sidebar-id .position { font-size: 0.78rem; font-weight: 500; color: var(--accent); }
     .sidebar-id .institution { font-size: 0.76rem; color: var(--muted); margin-top: 0.15rem; }
+    .sidebar-id .incoming {
+      font-size: 0.72rem; color: var(--muted); margin-top: 0.5rem;
+      padding-top: 0.5rem; border-top: 1px dashed var(--border);
+    }
 
     .sidebar-nav { display: flex; flex-direction: column; gap: 0.1rem; }
     .sidebar-nav a {
@@ -75,6 +82,8 @@
       border-radius: 3px; transition: color 0.15s, background 0.15s;
     }
     .sidebar-nav a:hover { color: var(--accent); background: rgba(124,54,38,0.07); }
+    .sidebar-nav a.nav-pavo { color: var(--blue); font-weight: 600; }
+    .sidebar-nav a.nav-pavo:hover { color: var(--blue); background: var(--blue-soft); }
 
     .sidebar-links { display: flex; flex-direction: column; gap: 0.2rem; margin-top: auto; }
     .sidebar-links a {
@@ -94,13 +103,17 @@
       border-radius: 3px; text-decoration: none; border-bottom: none;
       transition: opacity 0.15s; margin-top: 0.5rem;
     }
-    .cv-btn:hover { opacity: 0.88; }
+    .cv-btn:hover { opacity: 0.88; border-bottom: none; }
+    .cv-btn.secondary {
+      background: transparent; color: var(--accent);
+      border: 1px solid var(--accent); margin-top: 0.4rem;
+    }
 
     /* ── Main content ──────────────────────────────────────────────── */
     .content-col { flex: 1; min-width: 0; display: flex; flex-direction: column; }
-    main { flex: 1; padding: 3rem 3.5rem 4rem; max-width: 720px; }
+    main { flex: 1; padding: 3rem 3.5rem 4rem; max-width: 900px; }
 
-    section { padding-top: 3rem; }
+    section { padding-top: 3rem; padding-bottom: 0.5rem; }
     section + section { border-top: 1px solid var(--border); }
 
     h2 {
@@ -110,7 +123,7 @@
     h3 {
       font-size: 0.78rem; font-weight: 600; letter-spacing: 0.1em;
       text-transform: uppercase; color: var(--muted);
-      margin-top: 1.75rem; margin-bottom: 0.75rem;
+      margin-top: 2rem; margin-bottom: 0.75rem;
     }
 
     p { margin-bottom: 1em; }
@@ -127,10 +140,89 @@
     ul.plain { list-style: none; padding: 0; }
     ul.plain li { padding: 0.2rem 0; }
 
+    /* ── PAVO Blue feature ─────────────────────────────────────────── */
+    #pavo-blue h2 { color: var(--blue); }
+    .pavo-hero {
+      background: linear-gradient(135deg, #f3f6fe 0%, #e4ebfb 100%);
+      border: 1px solid #c9d5f3; border-left: 4px solid var(--blue);
+      border-radius: 4px; padding: 1.5rem 1.75rem; margin-bottom: 1.75rem;
+    }
+    .pavo-hero .kicker {
+      font-size: 0.68rem; font-weight: 600; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--blue); margin-bottom: 0.35rem;
+    }
+    .pavo-hero .title {
+      font-size: 1.45rem; font-weight: 700; line-height: 1.25;
+      letter-spacing: -0.01em; margin-bottom: 0.6rem;
+    }
+    .pavo-hero p { font-size: 0.96rem; }
+    .pill {
+      display: inline-block; font-size: 0.7rem; font-weight: 600;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      padding: 0.15rem 0.55rem; border-radius: 999px;
+      background: var(--blue); color: #fff; margin: 0 0.3rem 0.5rem 0;
+    }
+    .pill.outline { background: transparent; color: var(--blue); border: 1px solid var(--blue); }
+
+    .goals {
+      display: grid; grid-template-columns: repeat(2, 1fr);
+      gap: 0.75rem; margin: 0.5rem 0 1.5rem;
+    }
+    .goal {
+      background: #fff; border: 1px solid var(--border); border-radius: 4px;
+      padding: 1rem 1.1rem;
+    }
+    .goal .num {
+      font-size: 0.68rem; font-weight: 700; color: var(--blue);
+      letter-spacing: 0.1em; text-transform: uppercase;
+    }
+    .goal .big {
+      font-size: 1.35rem; font-weight: 700; line-height: 1.2;
+      margin: 0.2rem 0 0.35rem; color: var(--text);
+    }
+    .goal .desc { font-size: 0.86rem; line-height: 1.55; color: #3a3a48; }
+
+    .fig-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin: 1rem 0 1.5rem; }
+    figure { margin: 0 0 1.5rem; }
+    .fig-grid figure { margin: 0; }
+    figure a { border-bottom: none; display: block; }
+    figure a:hover { border-bottom: none; }
+    figure img {
+      width: 100%; height: auto; display: block;
+      background: #fff; border: 1px solid var(--border); border-radius: 3px;
+      padding: 0.5rem; transition: box-shadow 0.15s;
+    }
+    figure a:hover img { box-shadow: 0 2px 12px rgba(31,79,209,0.15); }
+    figcaption { font-size: 0.8rem; line-height: 1.5; color: var(--muted); margin-top: 0.5rem; }
+    figcaption strong { color: var(--text); font-weight: 600; }
+
+    .design-card {
+      display: grid; grid-template-columns: 1.3fr 1fr; gap: 1.25rem;
+      align-items: center; background: #fff; border: 1px solid var(--border);
+      border-radius: 4px; padding: 1rem; margin: 1rem 0 1.5rem;
+    }
+    .design-card img { width: 100%; height: auto; display: block; border: 1px solid var(--border); border-radius: 2px; }
+    .design-card a.thumb { border-bottom: none; }
+    .design-card .dc-title { font-weight: 600; margin-bottom: 0.35rem; }
+    .design-card p { font-size: 0.88rem; line-height: 1.6; }
+    .btn-blue {
+      display: inline-block; margin-top: 0.75rem; padding: 0.4rem 0.8rem;
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+      background: var(--blue); color: #fff; border-radius: 3px; border-bottom: none;
+    }
+    .btn-blue:hover { opacity: 0.9; border-bottom: none; }
+
+    .timeline-mini { list-style: none; padding: 0; margin: 0.5rem 0 1rem; }
+    .timeline-mini li {
+      padding: 0.45rem 0 0.45rem 1rem; border-left: 2px solid #c9d5f3;
+      font-size: 0.92rem; line-height: 1.55;
+    }
+    .timeline-mini li strong { color: var(--blue); }
+
     /* ── Pub stats ─────────────────────────────────────────────────── */
     .pub-stats {
       display: grid; grid-template-columns: repeat(4, 1fr);
-      gap: 0.65rem; margin-bottom: 2rem;
+      gap: 0.65rem; margin-bottom: 1.5rem;
     }
     .stat-box {
       padding: 0.75rem 0.9rem; border: 1px solid var(--border);
@@ -140,24 +232,38 @@
     .stat-label { font-size: 0.7rem; color: var(--muted); margin-top: 0.28rem; line-height: 1.3; }
 
     /* ── Publication list ──────────────────────────────────────────── */
+    .pub-toolbar { display: flex; flex-wrap: wrap; gap: 0.4rem; align-items: center; margin: 0.5rem 0 0.75rem; }
+    .pub-toolbar button {
+      font: inherit; font-size: 0.74rem; letter-spacing: 0.06em; text-transform: uppercase;
+      padding: 0.3rem 0.7rem; border: 1px solid var(--border); border-radius: 3px;
+      background: #fff; color: var(--muted); cursor: pointer;
+    }
+    .pub-toolbar button.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .pub-toolbar .spacer { flex: 1; }
+    .pub-toolbar a { font-size: 0.8rem; }
+
     .pub-list { list-style: none; padding: 0; margin-bottom: 1em; }
     .pub-list li {
-      padding: 0.65rem 0; border-bottom: 1px solid var(--border);
-      font-size: 0.94rem; line-height: 1.6;
+      padding: 0.7rem 0; border-bottom: 1px solid var(--border);
+      font-size: 0.92rem; line-height: 1.55;
     }
     .pub-list li:first-child { border-top: 1px solid var(--border); }
-    .pub-year {
-      display: inline-block; min-width: 2.8rem;
-      font-size: 0.76rem; letter-spacing: 0.04em; color: var(--muted);
-    }
+    .pub-list li.first-author { border-left: 3px solid var(--accent); padding-left: 0.75rem; }
+    .pub-list .pub-title { font-weight: 600; display: block; }
+    .pub-list .pub-authors { display: block; color: #3a3a48; font-size: 0.86rem; }
+    .pub-list .pub-authors b { color: var(--accent); }
+    .pub-list .pub-meta { display: block; font-size: 0.8rem; color: var(--muted); }
+    .pub-list.only-first li:not(.first-author) { display: none; }
 
-    /* ── Ruled items ───────────────────────────────────────────────── */
+    /* ── Ruled items / CV ──────────────────────────────────────────── */
     .ruled-item {
       padding: 0.55rem 0; border-bottom: 1px solid var(--border);
       font-size: 0.94rem; line-height: 1.6;
     }
     .ruled-item:first-of-type { border-top: 1px solid var(--border); }
     .item-meta { font-size: 0.8rem; color: var(--muted); }
+    .item-detail { font-size: 0.86rem; color: #3a3a48; margin-top: 0.2rem; }
+    .item-detail ul { padding-left: 1.1rem; }
     .badge-upcoming {
       display: inline-block; font-size: 0.66rem; font-weight: 600;
       letter-spacing: 0.07em; text-transform: uppercase;
@@ -165,6 +271,10 @@
       vertical-align: middle; background: transparent;
       color: var(--muted); border: 1px solid var(--border);
     }
+    .badge-upcoming.now { color: var(--accent); border-color: var(--accent); }
+
+    .cv-row { display: grid; grid-template-columns: 8.5rem 1fr; gap: 1rem; }
+    .cv-date { font-size: 0.8rem; color: var(--muted); padding-top: 0.1rem; }
 
     footer {
       padding: 1.25rem 3.5rem; border-top: 1px solid var(--border);
@@ -172,23 +282,29 @@
     }
 
     /* ── Responsive ────────────────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .fig-grid, .design-card { grid-template-columns: 1fr; }
+    }
     @media (max-width: 700px) {
       .page-wrapper { flex-direction: column; }
       .sidebar {
         width: 100%; height: auto; position: static;
         flex-direction: row; flex-wrap: wrap; align-items: center;
-        padding: 1rem 1.25rem; gap: 0.75rem;
+        padding: 1rem 1rem; gap: 0.75rem;
         border-right: none; border-bottom: 1px solid var(--border);
       }
-      .profile-photo { width: 52px; height: 52px; flex-shrink: 0; }
+      .profile-photo { width: 52px; height: 52px; flex-shrink: 0; margin: 0; }
       .photo-initials { font-size: 1.1rem; }
       .sidebar-id { text-align: left; flex: 1; min-width: 120px; }
       .sidebar-nav { flex-direction: row; flex-wrap: wrap; width: 100%; gap: 0.15rem; }
       .sidebar-links { flex-direction: row; flex-wrap: wrap; width: 100%; margin-top: 0; }
       .cv-btn { width: auto; margin-top: 0; }
-      main { padding: 1.5rem 1.25rem 3rem; }
-      footer { padding: 1rem 1.25rem; }
+      main { padding: 1.5rem 1rem 3rem; }
+      footer { padding: 1rem 1rem; }
       .pub-stats { grid-template-columns: repeat(2, 1fr); }
+      .goals { grid-template-columns: 1fr; }
+      .pavo-hero { padding: 1.25rem 1.1rem; }
+      .cv-row { grid-template-columns: 1fr; gap: 0; }
     }
   </style>
 </head>
@@ -206,10 +322,13 @@
       <h1>Robert Klement</h1>
       <p class="position">ESO Research Fellow</p>
       <p class="institution">CHARA Array &middot; Mount Wilson, CA</p>
+      <p class="incoming">From 15 Nov 2026:<br>Postdoctoral Researcher,<br>Georgia State University</p>
     </div>
     <nav class="sidebar-nav">
       <a href="#about">About</a>
+      <a href="#pavo-blue" class="nav-pavo">PAVO Blue</a>
       <a href="#research">Research</a>
+      <a href="#cv">CV</a>
       <a href="#publications">Publications</a>
       <a href="#talks">Talks</a>
       <a href="#teaching">Teaching</a>
@@ -222,106 +341,394 @@
       <a href="https://orcid.org/0000-0002-4313-0169" target="_blank" rel="noopener"><i class="lnk-icon">⊙</i> ORCID</a>
       <a href="https://github.com/robert-klement" target="_blank" rel="noopener"><i class="lnk-icon">⌥</i> GitHub</a>
     </div>
-    <a class="cv-btn" href="Robert_Klement_CV.pdf" target="_blank">Download CV</a>
+    <div>
+      <a class="cv-btn" href="Robert_Klement_CV.pdf" target="_blank">Download CV</a>
+      <a class="cv-btn secondary" href="Robert_Klement_publications.pdf" target="_blank">Publication list</a>
+    </div>
   </aside>
 
   <!-- Content column -->
   <div class="content-col">
     <main>
 
-      <!-- About -->
-      <section id="about">
+      <!-- ═══════════════════ About ═══════════════════ -->
+      <section id="about" style="padding-top:0">
         <h2>About</h2>
-        <p>I am a Research Fellow at the European Southern Observatory (ESO) Chile, currently stationed at the <a href="https://www.chara.gsu.edu/" target="_blank" rel="noopener">CHARA Array</a> on Mount Wilson, California for the 4th year of the Fellowship. During the first three years (2022&ndash;2024), I held VLTI Instrument Fellow duties at Paranal Observatory in Chile, serving as MATISSE and then GRAVITY Instrument Fellow.</p>
-        <p>Before joining ESO, I was a Postdoctoral Research Associate at the Center for High Angular Resolution Astronomy (CHARA) at Georgia State University (2017&ndash;2022), contributing to telescope operations and conducting independent research. I earned my Ph.D. in Astrophysics from Charles University in Prague in 2017, in joint supervision with ESO Santiago.</p>
+        <p>I am an astrophysicist working on massive binary stars and optical long-baseline interferometry. I am currently a Research Fellow at the European Southern Observatory (ESO), stationed for the 4th year of my Fellowship at the <a href="https://www.chara.gsu.edu/" target="_blank" rel="noopener">CHARA Array</a> on Mount Wilson, California, and affiliated with Nice Observatory for support of the SPICA instrument. From <strong>15 November 2026</strong> I will join <strong>Georgia State University</strong> as a Postdoctoral Researcher.</p>
+        <p>During the first three years of the Fellowship (2022&ndash;2025) I split my time between independent research and observatory duties at Paranal, serving as MATISSE and then GRAVITY Instrument Fellow at the VLTI. Before joining ESO, I was a Postdoctoral Research Associate at CHARA / Georgia State University (2017&ndash;2022). I earned my Ph.D. in Astrophysics from Charles University in Prague in 2017, jointly with ESO Santiago.</p>
+        <p>I am currently leading the development of <a href="#pavo-blue"><strong>PAVO Blue</strong></a>, a new visible-light beam combiner for the CHARA Array that will open interferometry down to 400&nbsp;nm.</p>
       </section>
 
-      <!-- Research -->
+      <!-- ═══════════════════ PAVO Blue (featured) ═══════════════════ -->
+      <section id="pavo-blue">
+        <h2>Featured project &middot; PAVO Blue</h2>
+
+        <div class="pavo-hero">
+          <div class="kicker">Instrument development &middot; CHARA Array</div>
+          <div class="title">PAVO Blue: interferometry in the blue, a leap in angular resolution and sensitivity</div>
+          <div>
+            <span class="pill">PI: R. Klement</span>
+            <span class="pill outline">NSF ATI proposal</span>
+            <span class="pill outline">400&ndash;800 nm</span>
+          </div>
+          <p>I am leading, as Principal Investigator, a funding proposal to the NSF <em>Advanced Technologies and Instrumentation</em> (ATI) program to build PAVO Blue at the CHARA Array. It is a new beam combiner based on the proven PAVO design, built around state-of-the-art EMCCD cameras. No long-baseline interferometric beam combiner in the world currently operates shortward of 600&nbsp;nm. Combined with CHARA&rsquo;s 331&nbsp;m baselines, PAVO Blue will deliver the finest angular resolution of any optical interferometer.</p>
+          <p style="font-size:0.86rem;color:var(--muted)">Team: R. Klement (PI), J. D. Monnier (U. Michigan), N. Anugu and D. R. Gies (CHARA / Georgia State University).</p>
+        </div>
+
+        <h3>Four main goals</h3>
+        <div class="goals">
+          <div class="goal">
+            <div class="num">Goal 1 &middot; Bandwidth</div>
+            <div class="big">400&ndash;800 nm</div>
+            <div class="desc">Full visible bandwidth with tunable sub-bands, compared to 630&ndash;900&nbsp;nm for the original PAVO.</div>
+          </div>
+          <div class="goal">
+            <div class="num">Goal 2 &middot; Resolution</div>
+            <div class="big">&lambda;/2B &asymp; 0.12 mas</div>
+            <div class="desc">Angular resolution at the blue end of the band, a 40% improvement over PAVO.</div>
+          </div>
+          <div class="goal">
+            <div class="num">Goal 3 &middot; Sensitivity</div>
+            <div class="big">+1.5 mag &middot; &Delta;m = 5</div>
+            <div class="desc">Up to ~1.5&nbsp;mag sensitivity gain over PAVO (limiting mag. ~9 typical, ~9.5 best), and binary companion detection down to 5&nbsp;mag contrast in typical conditions (7&nbsp;mag in the best).</div>
+          </div>
+          <div class="goal">
+            <div class="num">Goal 4 &middot; Six telescopes</div>
+            <div class="big">3 &times; 2T arms</div>
+            <div class="desc">Six-telescope pair-wise beam combination using three interferometric arms with separate cameras, compared to the two-telescope mode of PAVO. An alternative three-telescope closure-phase mode will also be available.</div>
+          </div>
+        </div>
+
+        <h3>A new parameter space</h3>
+        <p>PAVO Blue will address science gaps that are accessible only with CHARA: fundamental stellar parameters (radii, effective temperatures, limb and gravity darkening) for TESS and PLATO targets, and hidden companions and dynamical masses for the binaries that the final Gaia data releases will reveal. Blue wavelengths are especially suited to hot, massive stars and to stripped-star companions, which are much brighter relative to their companions in the blue than in the near-infrared.</p>
+
+        <div class="fig-grid">
+          <figure>
+            <a href="pavo_blue/fig1a_resolution.png" target="_blank"><img src="pavo_blue/fig1a_resolution.png" alt="Angular resolution versus wavelength for current interferometric beam combiners and PAVO Blue" loading="lazy"></a>
+            <figcaption><strong>Angular resolution vs. wavelength.</strong> PAVO Blue (blue band) reaches below every visible and near-IR beam combiner in operation at CHARA and the VLTI, down to a smallest measurable diameter of ~0.07&nbsp;mas.</figcaption>
+          </figure>
+          <figure>
+            <a href="pavo_blue/fig1b_detection_space.png" target="_blank"><img src="pavo_blue/fig1b_detection_space.png" alt="Companion detection space: magnitude difference versus separation" loading="lazy"></a>
+            <figcaption><strong>Companion detection space.</strong> PAVO Blue opens the hatched region at sub-0.5&nbsp;mas separations. Connected circles show known Be&nbsp;+&nbsp;stripped-star binaries: the contrast measured in the <em>H</em> band (orange) and the much lower contrast expected in the blue.</figcaption>
+          </figure>
+        </div>
+
+        <figure>
+          <a href="pavo_blue/pavo_blue_hr_diagram_row.png" target="_blank"><img src="pavo_blue/pavo_blue_hr_diagram_row.png" alt="HR diagrams of stars resolvable with PAVO Blue compared to archival interferometric measurements" loading="lazy"></a>
+          <figcaption><strong>Who becomes measurable.</strong> About 86,000 stars resolvable with PAVO Blue, compared to the ~700 with archival interferometric diameters. The gains include more than 1,000 new hot stars, ~2,400 metal-poor stars, and ~100 new transiting-planet hosts (up from just 14 accessible today in typical conditions).</figcaption>
+        </figure>
+
+        <div class="fig-grid">
+          <figure>
+            <a href="pavo_blue/fig1_horizon_b.png" target="_blank"><img src="pavo_blue/fig1_horizon_b.png" alt="Distance horizon for main-sequence stars by spectral type for CHARA instruments" loading="lazy"></a>
+            <figcaption><strong>Distance horizon</strong> for main-sequence stars across spectral types, for current CHARA instruments and PAVO Blue. The shaded band is the volume newly opened by PAVO Blue in typical conditions.</figcaption>
+          </figure>
+          <figure>
+            <a href="pavo_blue/fig_ms_limits.png" target="_blank"><img src="pavo_blue/fig_ms_limits.png" alt="Angular diameter at the magnitude limit and distance horizon versus spectral type" loading="lazy"></a>
+            <figcaption><strong>Resolution vs. sensitivity.</strong> Early-type stars are limited by angular resolution and late-type stars by sensitivity. The crossover sits near spectral type F0.</figcaption>
+          </figure>
+        </div>
+
+        <h3>Instrument concept</h3>
+        <p>PAVO Blue keeps the original PAVO&rsquo;s multi-mode spatial filtering with a cylindrical lenslet array. That approach makes it robust to the partial adaptive-optics correction available in the visible. Each of the three identical arms combines two beams, with its own mask, lenslet array, prism/grism spectrograph and Nuvu HN&uuml; EMCCD detector (three times lower clock-induced charge than the legacy camera). Fringe tracking is done in the near-IR by MIRC-X/SPICA-FT, while new atmospheric and longitudinal dispersion compensators condition the broad visible band.</p>
+
+        <figure>
+          <a href="pavo_blue/fig_block_diagram_lab_1arm.png" target="_blank"><img src="pavo_blue/fig_block_diagram_lab_1arm.png" alt="Block diagram of the beam path to PAVO Blue in the CHARA lab" loading="lazy"></a>
+          <figcaption><strong>Beam path in the CHARA laboratory.</strong> After the adaptive optics and delay lines, the infrared light goes to MIRC-X/SPICA-FT for fringe tracking, and the visible light goes through new dispersion compensators to the three PAVO Blue arms. Blue boxes are new components.</figcaption>
+        </figure>
+
+        <figure>
+          <a href="pavo_blue/fig_pavo_blue_arm.png" target="_blank"><img src="pavo_blue/fig_pavo_blue_arm.png" alt="Optical sketch of one PAVO Blue arm combining two beams" loading="lazy"></a>
+          <figcaption><strong>One PAVO Blue arm.</strong> Two beams are focused through a 2-hole spatial-filter mask and overlap on a cylindrical lenslet array in the pupil plane, where they form fringes. The lenslets slice the pupil into strips that are then spectrally dispersed onto the EMCCD.</figcaption>
+        </figure>
+
+        <div class="design-card">
+          <a class="thumb" href="pavo_blue/PAVO_Blue_R07_anamorphic_views.pdf" target="_blank"><img src="pavo_blue/R07_page1.png" alt="First page of the PAVO Blue R07 optical design: layout and propagated intensity" loading="lazy"></a>
+          <div>
+            <div class="dc-title">Optical design (Zemax, revision R07)</div>
+            <p>A real-optics anamorphic design of one two-beam camera module built from off-the-shelf components: TL400 focusing lenses, an Edmund cylindrical microlens array, crossed cylindrical doublets (4:1 anamorphism), an 18&deg; N-BK7 prism, and a 1024&times;1024 EMCCD. Physical-optics propagation through independent turbulent wavefronts traces the light from the focal masks to the detector at 400&ndash;800&nbsp;nm.</p>
+            <a class="btn-blue" href="pavo_blue/PAVO_Blue_R07_anamorphic_views.pdf" target="_blank">View design PDF (3 pages)</a>
+          </div>
+        </div>
+
+        <h3>Plan</h3>
+        <ul class="timeline-mini">
+          <li><strong>Year 1</strong> &mdash; Final design and procurement; data reduction pipeline, observing tools, and calibrator selection.</li>
+          <li><strong>Year 2</strong> &mdash; Lab integration and first light with one arm.</li>
+          <li><strong>Year 3</strong> &mdash; All three arms, commissioning, science verification, and release to the community through NOIRLab open access.</li>
+        </ul>
+      </section>
+
+      <!-- ═══════════════════ Research ═══════════════════ -->
       <section id="research">
         <h2>Research</h2>
-        <p>My research centers on the role of binarity in the evolution of massive stars, with a particular focus on classical Be stars and their hot, stripped subdwarf companions. I combine optical/infrared interferometry, high-resolution spectroscopy, radio observations, and photometry to characterize these systems and their circumstellar disks.</p>
+        <p>My research centers on the role of binarity in the evolution of massive stars, with a particular focus on classical Be stars and their hot, stripped subdwarf companions. I combine optical/infrared interferometry, high-resolution spectroscopy, radio observations, Gaia astrometry, and photometry to characterize these systems and their circumstellar disks.</p>
         <ul class="bullet">
-          <li>Be + sdOB binary star systems</li>
-          <li>Circumstellar disk modeling &mdash; tidal and radiative influence of stripped companions</li>
-          <li>Optical long-baseline interferometry (VLTI/GRAVITY, CHARA/MIRC-X, MYSTIC, PAVO, VEGA, SPICA)</li>
-          <li>High-resolution spectroscopy &amp; radial velocities</li>
-          <li>Binarity surveys among hot stars via interferometry, spectroscopy, radio, and photometry</li>
-          <li>Beam combiner instrumentation &amp; development (PAVO Blue, SPICA)</li>
+          <li>Be + sdOB binary star systems: detections, orbits, and dynamical masses</li>
+          <li>Circumstellar disk modeling, including the tidal and radiative influence of stripped companions</li>
+          <li>Binarity surveys of hot stars with interferometry, spectroscopy, Gaia astrometry, and radio interferometry</li>
+          <li>Optical long-baseline interferometry (VLTI/GRAVITY, PIONIER; CHARA/MIRC-X, MYSTIC, PAVO, VEGA, SPICA)</li>
+          <li>Beam combiner instrumentation: cameras, design, and science cases (<a href="#pavo-blue">PAVO Blue</a>)</li>
+          <li>Machine learning and AI tools applied to astronomical research</li>
         </ul>
-        <p><strong>Observing experience:</strong> 240+ nights at the VLT/VLTI (GRAVITY, MATISSE, PIONIER); 200+ nights at CHARA (MIRC-X, MYSTIC, PAVO, VEGA, SPICA); additional experience with the VLA, APEX, <em>Hubble</em>/STIS, LDT/EXPRES, and Apache Point/ARC.</p>
+
+        <h3>Telescope time &amp; observing experience</h3>
+        <div class="ruled-item">
+          <div><strong>VLT / VLTI</strong></div>
+          <div class="item-detail">20+ successful proposals (GRAVITY, PIONIER, UVES, X-shooter) &middot; 240 nights as science observer (GRAVITY, MATISSE, PIONIER) &middot; 50 nights as Night Shift Coordinator for the entire VLT + VLTI</div>
+        </div>
+        <div class="ruled-item">
+          <div><strong>CHARA Array</strong></div>
+          <div class="item-detail">20+ successful proposals (MIRC-X, MYSTIC, VEGA) &middot; 200+ nights as science observer (MIRC-X, MYSTIC, PAVO, VEGA, SPICA) &middot; 5 nights as array operator</div>
+        </div>
+        <div class="ruled-item">
+          <div><strong>Other facilities</strong></div>
+          <div class="item-detail">VLA (2 proposals) &middot; APEX/LABOCA (5 proposals, 5 nights) &middot; <em>HST</em>/STIS (co-I) &middot; LDT/EXPRES &middot; Apache Point/ARC echelle (certified observer)</div>
+        </div>
       </section>
 
-      <!-- Publications -->
+      <!-- ═══════════════════ CV ═══════════════════ -->
+      <section id="cv">
+        <h2>Curriculum Vitae</h2>
+        <p>Summary below &middot; <a href="Robert_Klement_CV.pdf" target="_blank">full CV (PDF)</a></p>
+
+        <h3>Positions</h3>
+        <div class="ruled-item cv-row">
+          <div class="cv-date">from Nov 2026</div>
+          <div><span class="badge-upcoming">Incoming</span><strong>Postdoctoral Researcher</strong> &middot; Georgia State University, USA</div>
+        </div>
+        <div class="ruled-item cv-row">
+          <div class="cv-date">2022 &ndash; 2026</div>
+          <div>
+            <span class="badge-upcoming now">Current</span><strong>Research Fellow</strong> &middot; European Southern Observatory, Chile
+            <div class="item-detail"><ul>
+              <li>Year 4: 100% independent research, stationed at the CHARA Array; affiliated with Nice Observatory for SPICA support</li>
+              <li>Years 1&ndash;3: 50% observatory duties at VLT Paranal (MATISSE, then GRAVITY Instrument Fellow)</li>
+            </ul></div>
+          </div>
+        </div>
+        <div class="ruled-item cv-row">
+          <div class="cv-date">2017 &ndash; 2022</div>
+          <div><strong>Postdoctoral Research Associate</strong> &middot; CHARA, Georgia State University, Mount Wilson, CA
+            <div class="item-detail">Night support for array operations, observing support for external proposals, lab alignment and engineering upgrades, research and outreach</div>
+          </div>
+        </div>
+        <div class="ruled-item cv-row">
+          <div class="cv-date">2012 &ndash; 2017</div>
+          <div><strong>Doctoral Candidate / Researcher</strong> &middot; Charles University, Prague</div>
+        </div>
+
+        <h3>Education</h3>
+        <div class="ruled-item cv-row">
+          <div class="cv-date">2017</div>
+          <div><strong>Ph.D., Astrophysics</strong> &middot; Astronomical Institute, Charles University, Prague &amp; ESO Santiago</div>
+        </div>
+        <div class="ruled-item cv-row">
+          <div class="cv-date">2014</div>
+          <div><strong>M.Sc. (Ing.), Physical Engineering and Nanotechnology</strong> &middot; Brno University of Technology</div>
+        </div>
+        <div class="ruled-item cv-row">
+          <div class="cv-date">2012</div>
+          <div><strong>M.Sc. (Mgr.), Theoretical Physics and Astrophysics</strong> &middot; Masaryk University, Brno</div>
+        </div>
+        <div class="ruled-item cv-row">
+          <div class="cv-date">2010</div>
+          <div><strong>B.Sc. (Bc.), Applied Physics &ndash; Astrophysics</strong> &middot; Masaryk University, Brno</div>
+        </div>
+        <div class="ruled-item cv-row">
+          <div class="cv-date">2026</div>
+          <div><strong>Professional Certificate, Learning Python for Data Science</strong> &middot; Harvard edX</div>
+        </div>
+      </section>
+
+      <!-- ═══════════════════ Publications ═══════════════════ -->
       <section id="publications">
         <h2>Publications</h2>
         <div class="pub-stats">
-          <div class="stat-box"><div class="stat-number">31</div><div class="stat-label">refereed papers</div></div>
-          <div class="stat-box"><div class="stat-number">734</div><div class="stat-label">total citations</div></div>
-          <div class="stat-box"><div class="stat-number">15</div><div class="stat-label">h-index</div></div>
-          <div class="stat-box"><div class="stat-number">9</div><div class="stat-label">first-author papers</div></div>
+          <div class="stat-box"><div class="stat-number">33</div><div class="stat-label">papers</div></div>
+          <div class="stat-box"><div class="stat-number">837</div><div class="stat-label">refereed citations</div></div>
+          <div class="stat-box"><div class="stat-number">16</div><div class="stat-label">h-index</div></div>
+          <div class="stat-box"><div class="stat-number">10</div><div class="stat-label">first-author papers</div></div>
         </div>
-        <p>Full list on <a href="https://ui.adsabs.harvard.edu/search/q=orcid%3A0000-0002-4313-0169&sort=date+desc%2C+bibcode+desc" target="_blank" rel="noopener">NASA ADS</a> and <a href="https://orcid.org/0000-0002-4313-0169" target="_blank" rel="noopener">ORCID</a>. All first-author papers:</p>
+        <p style="font-size:0.88rem;color:var(--muted)">From NASA/ADS, November 2026. Also on <a href="https://ui.adsabs.harvard.edu/search/q=orcid%3A0000-0002-4313-0169&sort=date+desc%2C+bibcode+desc" target="_blank" rel="noopener">NASA ADS</a> and <a href="https://orcid.org/0000-0002-4313-0169" target="_blank" rel="noopener">ORCID</a>.</p>
 
-        <ul class="pub-list">
+        <div class="pub-toolbar">
+          <button type="button" id="btn-first" class="active" onclick="showPubs(true)">First-author (10)</button>
+          <button type="button" id="btn-all" onclick="showPubs(false)">All (33)</button>
+          <span class="spacer"></span>
+          <a href="Robert_Klement_publications.pdf" target="_blank">Publication list (PDF)</a>
+        </div>
+
+        <ul class="pub-list only-first" id="pub-list">
           <li>
-            <span class="pub-year">2025</span>
-            Klement, Shultz &amp; Rivinius &mdash; Spatially resolved centrifugal magnetosphere caught in motion around the secondary component of &rho; Oph A.
-            <em>A&amp;A</em> 699, A37. &nbsp;
-            <a href="https://doi.org/10.1051/0004-6361/202554689" target="_blank" rel="noopener">ADS</a>
+            <span class="pub-title">Empirical H- and K-band Limb Darkening for 31 CHARA Stars: A Near-infrared Benchmark for Stellar-Atmosphere Models</span>
+            <span class="pub-authors">Anugu, N., Monnier, J. D., Mérand, A., et al. (incl. <b>Klement, R.</b>)</span>
+            <span class="pub-meta">2026 &middot; <em>AJ</em> 172, 214 &middot; <a href="https://doi.org/10.3847/1538-3881/ae9878" target="_blank" rel="noopener">doi</a></span>
+          </li>
+          <li class="first-author">
+            <span class="pub-title">Full orbital solution and dynamical masses for a new shell-Be + sdOB binary AN Col</span>
+            <span class="pub-authors"><b>Klement, R.</b>, Rivinius, T., Carciofi, A. C., Chaturvedi, A., Gies, D. R., et al.</span>
+            <span class="pub-meta">2026 &middot; <em>arXiv</em>:2610.02367 &middot; <a href="https://doi.org/10.48550/arXiv.2610.02367" target="_blank" rel="noopener">arXiv</a></span>
           </li>
           <li>
-            <span class="pub-year">2025</span>
-            Klement et al. &mdash; VLTI/GRAVITY enables the determination of the first dynamical masses of a classical Be + stripped and bloated pre-subdwarf binary.
-            <em>A&amp;A</em> 694, A208. &nbsp;
-            <a href="https://doi.org/10.1051/0004-6361/202453248" target="_blank" rel="noopener">ADS</a>
+            <span class="pub-title">Detection and Astrometry of the Ba&ndash;Bb Subsystem in &alpha; Piscium: First Dual-field Interferometry at the CHARA Array</span>
+            <span class="pub-authors">Anugu, N., <b>Klement, R.</b>, Monnier, J. D., Gies, D. R., Schaefer, G. H., et al.</span>
+            <span class="pub-meta">2026 &middot; <em>AJ</em> 171, 253 &middot; <a href="https://doi.org/10.3847/1538-3881/ae505c" target="_blank" rel="noopener">doi</a></span>
           </li>
           <li>
-            <span class="pub-year">2024</span>
-            Klement et al. &mdash; The CHARA Array Interferometric Program on the Multiplicity of Classical Be Stars: New Detections and Orbits of Stripped Subdwarf Companions.
-            <em>ApJ</em> 962, 70. &nbsp;
-            <a href="https://doi.org/10.3847/1538-4357/ad13ec" target="_blank" rel="noopener">ADS</a>
+            <span class="pub-title">&delta; Circini: A massive hierarchical triple system with an eclipsing binary</span>
+            <span class="pub-authors">Švrčková, J., Harmanec, P., <b>Klement, R.</b>, Rivinius, T., Barlow, B. N., et al.</span>
+            <span class="pub-meta">2026 &middot; <em>A&amp;A</em> 705, A99 &middot; <a href="https://doi.org/10.1051/0004-6361/202556994" target="_blank" rel="noopener">doi</a></span>
           </li>
           <li>
-            <span class="pub-year">2022</span>
-            Klement et al. &mdash; Dynamical Masses of the Primary Be Star and Secondary sdB Star in the Single-lined Binary &kappa; Dra (B6 IIIe).
-            <em>ApJ</em> 940, 86. &nbsp;
-            <a href="https://doi.org/10.3847/1538-4357/ac98b8" target="_blank" rel="noopener">ADS</a>
+            <span class="pub-title">Classical Be stars</span>
+            <span class="pub-authors">Rivinius, T., <b>Klement, R.</b></span>
+            <span class="pub-meta">2026 &middot; <em>Encyclopedia of Astrophysics</em>, Vol. 2, 430 &middot; <a href="https://doi.org/10.1016/B978-0-443-21439-4.00042-0" target="_blank" rel="noopener">doi</a></span>
           </li>
           <li>
-            <span class="pub-year">2022</span>
-            Klement et al. &mdash; Interferometric Detections of sdO Companions Orbiting Three Classical Be Stars.
-            <em>ApJ</em> 926, 213. &nbsp;
-            <a href="https://doi.org/10.3847/1538-4357/ac4266" target="_blank" rel="noopener">ADS</a>
+            <span class="pub-title">Binary Stars Take What They Get: Evidence for Efficient Mass Transfer from Stripped Stars with Rapidly Rotating Companions</span>
+            <span class="pub-authors">Lechien, T., de Mink, S. E., Valli, R., et al. (incl. <b>Klement, R.</b>)</span>
+            <span class="pub-meta">2025 &middot; <em>ApJL</em> 990, L51 &middot; <a href="https://doi.org/10.3847/2041-8213/adfdd4" target="_blank" rel="noopener">doi</a></span>
           </li>
           <li>
-            <span class="pub-year">2021</span>
-            Klement et al. &mdash; &nu;&thinsp;Gem: A Hierarchical Triple System with an Outer Be Star.
-            <em>ApJ</em> 916, 24. &nbsp;
-            <a href="https://doi.org/10.3847/1538-4357/ac062c" target="_blank" rel="noopener">ADS</a>
+            <span class="pub-title">Orbital and Physical Properties of the Pleiades Binary 27 Tau (Atlas)</span>
+            <span class="pub-authors">Torres, G., Tkachenko, A., Pavlovski, K., et al. (incl. <b>Klement, R.</b>)</span>
+            <span class="pub-meta">2025 &middot; <em>ApJ</em> 990, 107 &middot; <a href="https://doi.org/10.3847/1538-4357/adf224" target="_blank" rel="noopener">doi</a></span>
           </li>
           <li>
-            <span class="pub-year">2019</span>
-            Klement et al. &mdash; Prevalence of SED Turndown among Classical Be Stars: Are All Be Stars Close Binaries?
-            <em>ApJ</em> 885, 147. &nbsp;
-            <a href="https://doi.org/10.3847/1538-4357/ab48e7" target="_blank" rel="noopener">ADS</a>
+            <span class="pub-title">Discovery of the binary nature of the magnetospheric B-type star &rho; Oph A</span>
+            <span class="pub-authors">Shultz, M. E., Berry, I., Bohlender, D., et al. (incl. <b>Klement, R.</b>)</span>
+            <span class="pub-meta">2025 &middot; <em>A&amp;A</em> 700, A14 &middot; <a href="https://doi.org/10.1051/0004-6361/202554023" target="_blank" rel="noopener">doi</a></span>
           </li>
           <li>
-            <span class="pub-year">2017</span>
-            Klement et al. &mdash; Revealing the Structure of the Outer Disks of Be Stars.
-            <em>A&amp;A</em> 601, A74. &nbsp;
-            <a href="https://doi.org/10.1051/0004-6361/201629932" target="_blank" rel="noopener">ADS</a>
+            <span class="pub-title">Precise Age for the Binary HD 21278 in the Young &alpha; Persei Cluster</span>
+            <span class="pub-authors">Danner, C. A., Sandquist, E. L., Schaefer, G. H., et al. (incl. <b>Klement, R.</b>)</span>
+            <span class="pub-meta">2025 &middot; <em>ApJ</em> 988, 113 &middot; <a href="https://doi.org/10.3847/1538-4357/ade0bb" target="_blank" rel="noopener">doi</a></span>
+          </li>
+          <li class="first-author">
+            <span class="pub-title">Spatially resolved centrifugal magnetosphere caught in motion around the secondary component of &rho; Oph A</span>
+            <span class="pub-authors"><b>Klement, R.</b>, Shultz, M. E., Rivinius, T.</span>
+            <span class="pub-meta">2025 &middot; <em>A&amp;A</em> 699, A37 &middot; <a href="https://doi.org/10.1051/0004-6361/202554689" target="_blank" rel="noopener">doi</a></span>
           </li>
           <li>
-            <span class="pub-year">2015</span>
-            Klement et al. &mdash; Multitechnique Testing of the Viscous Decretion Disk Model. I. The Stable and Tenuous Disk of the Late-type Be Star &beta;&thinsp;CMi.
-            <em>A&amp;A</em> 584, A85. &nbsp;
-            <a href="https://doi.org/10.1051/0004-6361/201526535" target="_blank" rel="noopener">ADS</a>
+            <span class="pub-title">Newborn Be star systems observed shortly after mass transfer</span>
+            <span class="pub-authors">Rivinius, T., <b>Klement, R.</b>, Chojnowski, S. D., Baade, D., Abdul-Masih, M., et al.</span>
+            <span class="pub-meta">2025 &middot; <em>A&amp;A</em> 694, A172 &middot; <a href="https://doi.org/10.1051/0004-6361/202347275" target="_blank" rel="noopener">doi</a></span>
+          </li>
+          <li class="first-author">
+            <span class="pub-title">VLTI/GRAVITY enables the determination of the first dynamical masses of a classical Be + stripped and bloated pre-subdwarf binary</span>
+            <span class="pub-authors"><b>Klement, R.</b>, Rivinius, T., Baade, D., Mérand, A., Bodensteiner, J., et al.</span>
+            <span class="pub-meta">2025 &middot; <em>A&amp;A</em> 694, A208 &middot; <a href="https://doi.org/10.1051/0004-6361/202453248" target="_blank" rel="noopener">doi</a></span>
+          </li>
+          <li class="first-author">
+            <span class="pub-title">The CHARA Array Interferometric Program on the Multiplicity of Classical Be Stars: New Detections and Orbits of Stripped Subdwarf Companions</span>
+            <span class="pub-authors"><b>Klement, R.</b>, Rivinius, T., Gies, D. R., Baade, D., Mérand, A., et al.</span>
+            <span class="pub-meta">2024 &middot; <em>ApJ</em> 962, 70 &middot; <a href="https://doi.org/10.3847/1538-4357/ad13ec" target="_blank" rel="noopener">doi</a></span>
+          </li>
+          <li>
+            <span class="pub-title">Bayesian sampling with BeAtlas, a grid of synthetic Be star spectra I. Recovering the fundamental parameters of &alpha; Eri and &beta; CMi</span>
+            <span class="pub-authors">Rubio, A. C., Carciofi, A. C., Ticiani, P., et al. (incl. <b>Klement, R.</b>)</span>
+            <span class="pub-meta">2023 &middot; <em>MNRAS</em> 526, 3007 &middot; <a href="https://doi.org/10.1093/mnras/stad2652" target="_blank" rel="noopener">doi</a></span>
+          </li>
+          <li>
+            <span class="pub-title">Precise Age for the Binary Star System 12 Com in the Coma Berenices Cluster</span>
+            <span class="pub-authors">Lam, R., Sandquist, E. L., Schaefer, G. H., et al. (incl. <b>Klement, R.</b>)</span>
+            <span class="pub-meta">2023 &middot; <em>AJ</em> 166, 29 &middot; <a href="https://doi.org/10.3847/1538-3881/accddb" target="_blank" rel="noopener">doi</a></span>
+          </li>
+          <li>
+            <span class="pub-title">Three-dimensional Orbit of AC Her Determined: Binary-induced Truncation Cannot Explain the Large Cavity in This Post-AGB Transition Disk</span>
+            <span class="pub-authors">Anugu, N., Kluska, J., Gardner, T., et al. (incl. <b>Klement, R.</b>)</span>
+            <span class="pub-meta">2023 &middot; <em>ApJ</em> 950, 149 &middot; <a href="https://doi.org/10.3847/1538-4357/acd1e6" target="_blank" rel="noopener">doi</a></span>
+          </li>
+          <li>
+            <span class="pub-title">Gamma Cas Stars as Be+White Dwarf Binary Systems</span>
+            <span class="pub-authors">Gies, D. R., Wang, L., <b>Klement, R.</b></span>
+            <span class="pub-meta">2023 &middot; <em>ApJL</em> 942, L6 &middot; <a href="https://doi.org/10.3847/2041-8213/acaaa1" target="_blank" rel="noopener">doi</a></span>
+          </li>
+          <li>
+            <span class="pub-title">The Orbits and Dynamical Masses of the Castor System</span>
+            <span class="pub-authors">Torres, G., Schaefer, G. H., Monnier, J. D., et al. (incl. <b>Klement, R.</b>)</span>
+            <span class="pub-meta">2022 &middot; <em>ApJ</em> 941, 8 &middot; <a href="https://doi.org/10.3847/1538-4357/ac9d8d" target="_blank" rel="noopener">doi</a></span>
+          </li>
+          <li class="first-author">
+            <span class="pub-title">Dynamical Masses of the Primary Be Star and Secondary sdB Star in the Single-lined Binary &kappa; Dra (B6 IIIe)</span>
+            <span class="pub-authors"><b>Klement, R.</b>, Baade, D., Rivinius, T., Gies, D. R., Wang, L., et al.</span>
+            <span class="pub-meta">2022 &middot; <em>ApJ</em> 940, 86 &middot; <a href="https://doi.org/10.3847/1538-4357/ac98b8" target="_blank" rel="noopener">doi</a></span>
+          </li>
+          <li>
+            <span class="pub-title">The binary system of the spinning-top Be star Achernar</span>
+            <span class="pub-authors">Kervella, P., Borgniet, S., Domiciano de Souza, A., et al. (incl. <b>Klement, R.</b>)</span>
+            <span class="pub-meta">2022 &middot; <em>A&amp;A</em> 667, A111 &middot; <a href="https://doi.org/10.1051/0004-6361/202244009" target="_blank" rel="noopener">doi</a></span>
+          </li>
+          <li>
+            <span class="pub-title">A detailed analysis of the Gl 486 planetary system</span>
+            <span class="pub-authors">Caballero, J. A., González-Álvarez, E., Brady, M., et al. (incl. <b>Klement, R.</b>)</span>
+            <span class="pub-meta">2022 &middot; <em>A&amp;A</em> 665, A120 &middot; <a href="https://doi.org/10.1051/0004-6361/202243548" target="_blank" rel="noopener">doi</a></span>
+          </li>
+          <li>
+            <span class="pub-title">The Interferometric Binary &epsilon; Cnc in Praesepe: Precise Masses and Age</span>
+            <span class="pub-authors">Morales, L. M., Sandquist, E. L., Schaefer, G. H., Farrington, C. D., <b>Klement, R.</b>, et al.</span>
+            <span class="pub-meta">2022 &middot; <em>AJ</em> 164, 34 &middot; <a href="https://doi.org/10.3847/1538-3881/ac7329" target="_blank" rel="noopener">doi</a></span>
+          </li>
+          <li>
+            <span class="pub-title">HR 6819 is a binary system with no black hole. Revisiting the source with infrared interferometry and optical integral field spectroscopy</span>
+            <span class="pub-authors">Frost, A. J., Bodensteiner, J., Rivinius, T., et al. (incl. <b>Klement, R.</b>)</span>
+            <span class="pub-meta">2022 &middot; <em>A&amp;A</em> 659, L3 &middot; <a href="https://doi.org/10.1051/0004-6361/202143004" target="_blank" rel="noopener">doi</a></span>
+          </li>
+          <li class="first-author">
+            <span class="pub-title">Interferometric Detections of sdO Companions Orbiting Three Classical Be Stars</span>
+            <span class="pub-authors"><b>Klement, R.</b>, Schaefer, G. H., Gies, D. R., Wang, L., Baade, D., et al.</span>
+            <span class="pub-meta">2022 &middot; <em>ApJ</em> 926, 213 &middot; <a href="https://doi.org/10.3847/1538-4357/ac4266" target="_blank" rel="noopener">doi</a></span>
+          </li>
+          <li>
+            <span class="pub-title">The Transformative Journey of HD 93521</span>
+            <span class="pub-authors">Gies, D. R., Shepard, K., Wysocki, P., <b>Klement, R.</b></span>
+            <span class="pub-meta">2022 &middot; <em>AJ</em> 163, 100 &middot; <a href="https://doi.org/10.3847/1538-3881/ac43be" target="_blank" rel="noopener">doi</a></span>
+          </li>
+          <li class="first-author">
+            <span class="pub-title">&nu; Gem: A Hierarchical Triple System with an Outer Be Star</span>
+            <span class="pub-authors"><b>Klement, R.</b>, Hadrava, P., Rivinius, T., Baade, D., Cabezas, M., et al.</span>
+            <span class="pub-meta">2021 &middot; <em>ApJ</em> 916, 24 &middot; <a href="https://doi.org/10.3847/1538-4357/ac062c" target="_blank" rel="noopener">doi</a></span>
+          </li>
+          <li>
+            <span class="pub-title">ARMADA. I. Triple Companions Detected in B-type Binaries &alpha; Del and &nu; Gem</span>
+            <span class="pub-authors">Gardner, T., Monnier, J. D., Fekel, F. C., et al. (incl. <b>Klement, R.</b>)</span>
+            <span class="pub-meta">2021 &middot; <em>AJ</em> 161, 40 &middot; <a href="https://doi.org/10.3847/1538-3881/abcf4e" target="_blank" rel="noopener">doi</a></span>
+          </li>
+          <li>
+            <span class="pub-title">A naked-eye triple system with a nonaccreting black hole in the inner binary</span>
+            <span class="pub-authors">Rivinius, T., Baade, D., Hadrava, P., Heida, M., <b>Klement, R.</b></span>
+            <span class="pub-meta">2020 &middot; <em>A&amp;A</em> 637, L3 &middot; <a href="https://doi.org/10.1051/0004-6361/202038020" target="_blank" rel="noopener">doi</a></span>
+          </li>
+          <li class="first-author">
+            <span class="pub-title">Prevalence of SED Turndown among Classical Be Stars: Are All Be Stars Close Binaries?</span>
+            <span class="pub-authors"><b>Klement, R.</b>, Carciofi, A. C., Rivinius, T., Ignace, R., Matthews, L. D., et al.</span>
+            <span class="pub-meta">2019 &middot; <em>ApJ</em> 885, 147 &middot; <a href="https://doi.org/10.3847/1538-4357/ab48e7" target="_blank" rel="noopener">doi</a></span>
+          </li>
+          <li class="first-author">
+            <span class="pub-title">Revealing the structure of the outer disks of Be stars</span>
+            <span class="pub-authors"><b>Klement, R.</b>, Carciofi, A. C., Rivinius, T., Matthews, L. D., Vieira, R. G., et al.</span>
+            <span class="pub-meta">2017 &middot; <em>A&amp;A</em> 601, A74 &middot; <a href="https://doi.org/10.1051/0004-6361/201629932" target="_blank" rel="noopener">doi</a></span>
+          </li>
+          <li>
+            <span class="pub-title">A Spectroscopic Orbit for the Late-type Be Star &beta; CMi</span>
+            <span class="pub-authors">Dulaney, N. A., Richardson, N. D., Gerhartz, C. J., et al. (incl. <b>Klement, R.</b>)</span>
+            <span class="pub-meta">2017 &middot; <em>ApJ</em> 836, 112 &middot; <a href="https://doi.org/10.3847/1538-4357/836/1/112" target="_blank" rel="noopener">doi</a></span>
+          </li>
+          <li>
+            <span class="pub-title">Investigating the Circumstellar Disk of the Be Shell Star 48 Librae</span>
+            <span class="pub-authors">Silaj, J., Jones, C. E., Carciofi, A. C., et al. (incl. <b>Klement, R.</b>)</span>
+            <span class="pub-meta">2016 &middot; <em>ApJ</em> 826, 81 &middot; <a href="https://doi.org/10.3847/0004-637X/826/1/81" target="_blank" rel="noopener">doi</a></span>
+          </li>
+          <li class="first-author">
+            <span class="pub-title">Multitechnique testing of the viscous decretion disk model. I. The stable and tenuous disk of the late-type Be star &beta; CMi</span>
+            <span class="pub-authors"><b>Klement, R.</b>, Carciofi, A. C., Rivinius, T., Panoglou, D., Vieira, R. G., et al.</span>
+            <span class="pub-meta">2015 &middot; <em>A&amp;A</em> 584, A85 &middot; <a href="https://doi.org/10.1051/0004-6361/201526535" target="_blank" rel="noopener">doi</a></span>
           </li>
         </ul>
+      </section>
 
-
-
-      <!-- Talks -->
+      <!-- ═══════════════════ Talks ═══════════════════ -->
       <section id="talks">
         <h2>Talks &amp; Presentations</h2>
 
@@ -334,50 +741,68 @@
           <div>&ldquo;Multiplicity among classical Be stars&rdquo;</div>
           <div class="item-meta">3,2,1: Massive Triples, Binaries and Mergers 2023 &middot; Leuven, Belgium &middot; July 2023</div>
         </div>
+        <p style="font-size:0.85rem;color:var(--muted);margin-top:0.6rem">Two further invitations (EAS 2023; Hot Stars 2024: Life with Circumstellar Matter) declined due to scheduling.</p>
+      </section>
 
-
-
-      <!-- Teaching -->
+      <!-- ═══════════════════ Teaching ═══════════════════ -->
       <section id="teaching">
         <h2>Teaching &amp; Mentoring</h2>
 
         <h3>Lectures &amp; Tutorials</h3>
         <div class="ruled-item">
-          <div>Introduction to Optical Interferometry: Basic Concepts, Observations, and Fitting of Geometrical Models</div>
-          <div class="item-meta">Series of three 1.5-hour lectures &middot; Selected Chapters on Astrophysics, <a href="https://www.mff.cuni.cz/" target="_blank" rel="noopener">Charles University</a>, Prague &middot; November 2024 (remote)</div>
+          <div><a href="https://github.com/amerand/PMOIRED" target="_blank" rel="noopener">PMOIRED</a> interferometric binary grid search &mdash; hands-on tutorial</div>
+          <div class="item-meta">Workshop on New Visions in Optical Interferometry &middot; Socorro, NM, USA &middot; March 2026</div>
         </div>
         <div class="ruled-item">
-          <div><a href="https://github.com/amerand/PMOIRED" target="_blank" rel="noopener">PMOIRED</a> binary grid search &mdash; hands-on tutorial</div>
-          <div class="item-meta">Workshop on New Visions in Optical Interferometry &middot; Socorro, NM, USA &middot; March 2026</div>
+          <div>Introduction to Optical Interferometry: Basic Concepts, Observations, and Fitting of Geometrical Models</div>
+          <div class="item-meta">Series of three 1.5-hour lectures &middot; Selected Chapters on Astrophysics, <a href="https://www.mff.cuni.cz/" target="_blank" rel="noopener">Charles University</a>, Prague &middot; November 2024 (remote)</div>
         </div>
         <div class="ruled-item">
           <div>CHARA/VEGA observing, reduction, and data analysis &mdash; tutorial</div>
           <div class="item-meta">GSU Summer Lecture Series &middot; July 2021</div>
         </div>
+        <div class="ruled-item">
+          <div>The CHARA Array &mdash; outreach presentation for Mount Wilson Observatory docents</div>
+          <div class="item-meta">Mount Wilson, CA &middot; May 2019</div>
+        </div>
 
         <h3>Mentoring</h3>
         <div class="ruled-item">
           <div>Ph.D. student supervision &mdash; Jana &Scaron;vr&ccaron;kov&aacute;</div>
-          <div class="item-meta">1-year <a href="https://www.eso.org/sci/publications/announcements.html" target="_blank" rel="noopener">ESO Chile Studentship</a> &middot; November 2024 &ndash; November 2025</div>
+          <div class="item-meta">1-year ESO Chile Studentship &middot; November 2024 &ndash; November 2025</div>
         </div>
         <div class="ruled-item">
           <div>Ph.D. student co-supervision &mdash; Suman Bhattacharyya</div>
-          <div class="item-meta">1-year <a href="https://www.eso.org/sci/publications/announcements.html" target="_blank" rel="noopener">ESO Chile Studentship</a> &middot; June 2024 &ndash; June 2025</div>
+          <div class="item-meta">1-year ESO Chile Studentship &middot; June 2024 &ndash; June 2025</div>
         </div>
+      </section>
 
-
-
-      <!-- Service -->
+      <!-- ═══════════════════ Service ═══════════════════ -->
       <section id="service">
         <h2>Community Service</h2>
         <div class="ruled-item">
-          <div>Executive member, <a href="https://www.iau.org/" target="_blank" rel="noopener">IAU</a> Working Group on Active B-type Stars (WGABS)</div>
-          <div class="item-meta">2022 &ndash; 2028</div>
+          <div>Executive member, IAU Working Group on Active B-type Stars (WGABS)</div>
+          <div class="item-meta">November 2022 &ndash; present</div>
         </div>
-
+        <div class="ruled-item">
+          <div>CHARA Array internal Time Allocation Committee</div>
+          <div class="item-meta">Semesters 2018B, 2019B, 2020B, 2022B, 2026B, 2027A</div>
+        </div>
+        <div class="ruled-item">
+          <div>Visitors Committee, ESO Chile &mdash; evaluation of applications for short-term research visits</div>
+          <div class="item-meta">November 2022 &ndash; November 2025</div>
+        </div>
+        <div class="ruled-item">
+          <div>Technical feasibility evaluation of accepted GRAVITY observing proposals</div>
+          <div class="item-meta">November 2022 &ndash; November 2025</div>
+        </div>
+        <div class="ruled-item">
+          <div>Student Internship Committee, ESO</div>
+          <div class="item-meta">2024 call</div>
+        </div>
       </section>
 
-      <!-- Contact -->
+      <!-- ═══════════════════ Contact ═══════════════════ -->
       <section id="contact">
         <h2>Contact</h2>
         <ul class="plain">
@@ -386,15 +811,25 @@
           <li>GitHub: <a href="https://github.com/robert-klement" target="_blank" rel="noopener">robert-klement</a></li>
           <li style="margin-top:0.5rem; color:var(--muted); font-size:0.9rem;">
             Currently stationed at the CHARA Array, Mount Wilson, CA.<br>
-            ESO Research Fellow, affiliated with Nice Observatory (SPICA).
+            From 15 November 2026: Georgia State University.
           </li>
         </ul>
       </section>
 
     </main>
-    <footer>Robert Klement &middot; Last updated September 2026</footer>
+    <footer>Robert Klement &middot; Last updated November 2026</footer>
   </div>
 
 </div>
+
+<script>
+  // Toggle between first-author papers only and the full publication list
+  function showPubs(firstOnly) {
+    const list = document.getElementById('pub-list');
+    list.classList.toggle('only-first', firstOnly);
+    document.getElementById('btn-first').classList.toggle('active', firstOnly);
+    document.getElementById('btn-all').classList.toggle('active', !firstOnly);
+  }
+</script>
 </body>
 </html>
