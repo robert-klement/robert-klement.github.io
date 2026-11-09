@@ -93,7 +93,8 @@
       margin: 0 auto; flex-shrink: 0;
       box-shadow: 0 0 0 3px var(--bg-sidebar), 0 0 0 4px var(--border);
     }
-    .profile-photo img { width: 100%; height: 100%; object-fit: cover; }
+    /* object-position moves the crop up so the face (not the shirt) fills the circle */
+    .profile-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 28%; }
     .photo-initials {
       font-family: var(--serif); font-size: 1.8rem; font-weight: 600; color: #fff;
       line-height: 1;
@@ -544,7 +545,7 @@
       <header class="hero">
         <p class="eyebrow">Astrophysics &middot; Optical interferometry &middot; Massive binaries</p>
         <h1 class="hero-name">Robert Klement</h1>
-        <p class="hero-lede">I study how binary interaction shapes the lives of massive stars, especially <em>classical Be stars</em> and their stripped companions, using the longest-baseline optical interferometers in the world.</p>
+        <p class="hero-lede">I study how binary interaction shapes the lives of massive stars, especially <em>classical Be stars</em> and their stripped companions, using longest baseline interferometry with VLTI and CHARA.</p>
 
         <!-- Visible spectrum, 400–800 nm, with the Hα line marked -->
         <div class="spectrum-bar" aria-hidden="true">
@@ -566,7 +567,7 @@
         <h2>About</h2>
         <p>I am an astrophysicist working on massive binary stars and optical long-baseline interferometry. I am currently a Research Fellow at the European Southern Observatory (ESO), stationed for the 4th year of my Fellowship at the <a href="https://www.chara.gsu.edu/" target="_blank" rel="noopener">CHARA Array</a> on Mount Wilson, California, and affiliated with Nice Observatory for support of the SPICA instrument. From <strong>15 November 2026</strong> I will join <strong>Georgia State University</strong> as a Postdoctoral Researcher.</p>
         <p>During the first three years of the Fellowship (2022&ndash;2025) I split my time between independent research and observatory duties at Paranal, serving as MATISSE and then GRAVITY Instrument Fellow at the VLTI. Before joining ESO, I was a Postdoctoral Research Associate at CHARA / Georgia State University (2017&ndash;2022). I earned my Ph.D. in Astrophysics from Charles University in Prague in 2017, jointly with ESO Santiago.</p>
-        <p>I am currently leading the development of <a href="#pavo-blue"><strong>PAVO Blue</strong></a>, a new visible-light beam combiner for the CHARA Array that will open interferometry down to 400&nbsp;nm.</p>
+        <p>I am currently leading the <a href="#pavo-blue"><strong>PAVO Blue</strong></a> project. PAVO Blue will be a new visible-light beam combiner for the CHARA Array that will reach down to 400&nbsp;nm for the first time.</p>
       </section>
 
       <!-- ═══════════════════ PAVO Blue (featured) ═══════════════════ -->
@@ -581,7 +582,7 @@
             <span class="pill outline">NSF ATI proposal</span>
             <span class="pill outline">400&ndash;800 nm</span>
           </div>
-          <p>I am leading, as Principal Investigator, a funding proposal to the NSF <em>Advanced Technologies and Instrumentation</em> (ATI) program to build PAVO Blue at the CHARA Array. It is a new beam combiner based on the proven PAVO design, built around state-of-the-art EMCCD cameras. No long-baseline interferometric beam combiner in the world currently operates shortward of 600&nbsp;nm. Combined with CHARA&rsquo;s 331&nbsp;m baselines, PAVO Blue will deliver the finest angular resolution of any optical interferometer.</p>
+          <p>I am the PI of a funding proposal to the NSF <em>Advanced Technologies and Instrumentation</em> (ATI) program to build PAVO Blue at the CHARA Array. It is a new beam combiner based on the proven PAVO design, built around state-of-the-art EMCCD cameras. No long-baseline interferometric beam combiner in the world currently operates shortward of 600&nbsp;nm. Combined with CHARA&rsquo;s 331&nbsp;m baselines, PAVO Blue will deliver the finest angular resolution of any optical interferometer.</p>
           <p class="team">Team: R. Klement (PI), J. D. Monnier (U. Michigan), N. Anugu and D. R. Gies (CHARA / Georgia State University).</p>
         </div>
 
@@ -599,7 +600,7 @@
           </div>
           <div class="goal">
             <div class="num">Goal 3 &middot; Sensitivity</div>
-            <div class="big">+1.5 mag &middot; &Delta;m = 5</div>
+            <div class="big">+1.5 mag &middot; binary contrast &Delta;m = 7</div>
             <div class="desc">Up to ~1.5&nbsp;mag sensitivity gain over PAVO (limiting mag. ~9 typical, ~9.5 best), and binary companion detection down to 5&nbsp;mag contrast in typical conditions (7&nbsp;mag in the best).</div>
           </div>
           <div class="goal">
@@ -975,7 +976,7 @@
           <div class="item-meta">GSU Summer Lecture Series &middot; July 2021</div>
         </div>
         <div class="ruled-item">
-          <div>The CHARA Array &mdash; outreach presentation for Mount Wilson Observatory docents</div>
+          <div>The CHARA Array &mdash; outreach presentation for Mount Wilson Observatory staff</div>
           <div class="item-meta">Mount Wilson, CA &middot; May 2019</div>
         </div>
 
@@ -1003,7 +1004,7 @@
         </div>
         <div class="ruled-item">
           <div>Visitors Committee, ESO Chile &mdash; evaluation of applications for short-term research visits</div>
-          <div class="item-meta">November 2022 &ndash; November 2025</div>
+          <div class="item-meta">November 2023 &ndash; November 2024</div>
         </div>
         <div class="ruled-item">
           <div>Technical feasibility evaluation of accepted GRAVITY observing proposals</div>
@@ -1024,7 +1025,6 @@
           <li>GitHub: <a href="https://github.com/robert-klement" target="_blank" rel="noopener">robert-klement</a></li>
           <li style="margin-top:0.5rem; color:var(--muted); font-size:0.9rem;">
             Currently stationed at the CHARA Array, Mount Wilson, CA.<br>
-            From 15 November 2026: Georgia State University.
           </li>
         </ul>
       </section>
