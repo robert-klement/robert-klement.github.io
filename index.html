@@ -28,6 +28,7 @@
       --accent-soft: rgba(124,54,38,0.08);
       --blue:        #1f4fd1;
       --blue-soft:   #e9eefb;
+      --mroi:        #0f7a6c;
       --navy:        #0c1430;
       --sidebar-w:   228px;
       --serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
@@ -37,6 +38,13 @@
                     #6a2cff 0%, #2f4dff 12%, #00a8ff 23%, #00c98a 35%,
                     #c9e000 46%, #ffb000 52%, #ff6a00 57%, #e81e00 64%,
                     #a80000 80%, #3d0000 100%);
+      /* Same colours on a log axis 0.4 → 2.5 µm (hero bar).
+         position = ln(λ / 0.4 µm) / ln(2.5 / 0.4); 0.8 µm sits at 37.8%.
+         Beyond the visible the bar fades out to suggest the near-IR. */
+      --spectrum-wide: linear-gradient(90deg,
+                    #6a2cff 0%, #2f4dff 6.2%, #00a8ff 11.3%, #00c98a 16.4%,
+                    #c9e000 20.7%, #ffb000 22.8%, #ff6a00 24.6%, #e81e00 27%,
+                    #a80000 32.1%, #3d0000 37.8%, rgba(110,40,30,0.18) 100%);
     }
 
     @media (prefers-color-scheme: dark) {
@@ -53,6 +61,7 @@
         --accent-soft: rgba(224,128,107,0.12);
         --blue:        #7c9cff;
         --blue-soft:   rgba(124,156,255,0.12);
+        --mroi:        #4fc2b0;
       }
     }
 
@@ -171,16 +180,75 @@
 
     /* Spectrum bar with an Hα tick */
     .spectrum-bar { position: relative; margin: 2.4rem 0 1.75rem; max-width: 40rem; }
-    .spectrum-bar .bar { height: 6px; border-radius: 3px; background: var(--spectrum); }
+    .spectrum-bar .bar { height: 6px; border-radius: 3px; background: var(--spectrum-wide); }
+    /* Tick labels are placed by hand at their log-scale positions */
     .spectrum-bar .ticks {
-      display: flex; justify-content: space-between;
+      position: relative; height: 1rem;
       font-size: 0.66rem; color: var(--muted); margin-top: 0.3rem; letter-spacing: 0.04em;
     }
-    .spectrum-bar .ha {
-      position: absolute; left: 64%; top: -5px; height: 16px; width: 2px;
+    .spectrum-bar .ticks span { position: absolute; transform: translateX(-50%); white-space: nowrap; }
+    .spectrum-bar .ticks span:first-child { transform: none; }
+    .spectrum-bar .ticks span:last-child  { transform: translateX(-100%); }
+    /* On phones, drop the in-between tick labels so they don't overlap */
+    @media (max-width: 520px) { .spectrum-bar .ticks .minor { display: none; } }
+
+    /* Instrument lanes: each .band is placed with inline left/width in % of the axis */
+    .spectrum-bar .lanes { position: relative; margin-top: 0.5rem; }
+    .spectrum-bar .lane { position: relative; height: 1.45rem; }
+    .spectrum-bar .band {
+      position: absolute; bottom: 0; height: 4px; border-radius: 2px; background: var(--accent);
+    }
+    .spectrum-bar .band span {
+      position: absolute; left: 0; bottom: 6px; white-space: nowrap;
+      font-size: 0.66rem; font-weight: 600; line-height: 1; color: var(--accent);
+    }
+    .spectrum-bar .band.vlti { background: var(--text-2); }
+    .spectrum-bar .band.vlti span { color: var(--text-2); }
+    /* PAVO Blue in the site's blue */
+    .spectrum-bar .band.planned.pavo-blue { border-color: var(--blue); }
+    .spectrum-bar .band.pavo-blue span { color: var(--blue); }
+    /* Facility labels at the left of each group, and a small gap between groups */
+    .spectrum-bar .group {
+      position: absolute; left: 0; bottom: -3px; font-size: 0.6rem; font-weight: 600;
+      letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); line-height: 1;
+    }
+    .spectrum-bar .lane.group-start { margin-top: 0.45rem; }
+    /* Planned: dashed outline */
+    .spectrum-bar .band.planned {
+      background: none; height: 6px; border: 1.5px dashed var(--accent);
+    }
+    .spectrum-bar .band.planned span { bottom: 8px; }
+    /* Commissioning: faint and small */
+    .spectrum-bar .band.commissioning { opacity: 0.4; height: 3px; }
+    .spectrum-bar .band.commissioning span { font-weight: 500; font-size: 0.6rem; }
+    /* Off-scale arrow for MATISSE (3–13 µm) */
+    .spectrum-bar .band.offscale {
+      background: none; border-top: 1.5px dashed var(--text-2); height: 0; border-radius: 0;
+    }
+    .spectrum-bar .band.offscale::after {
+      content: ""; position: absolute; right: -1px; top: -5px;
+      border: 4px solid transparent; border-left: 6px solid var(--text-2); border-right: 0;
+    }
+    .spectrum-bar .band.offscale span { left: auto; right: 0; color: var(--text-2); }
+    /* MROI: planned, dashed in its own colour */
+    .spectrum-bar .band.mroi { border-color: var(--mroi); }
+    .spectrum-bar .band.mroi span { color: var(--mroi); }
+    .spectrum-bar .legend {
+      display: flex; flex-wrap: wrap; gap: 0.3rem 1rem; margin-top: 0.6rem;
+      font-size: 0.64rem; color: var(--muted);
+    }
+    .spectrum-bar .legend i {
+      display: inline-block; width: 14px; height: 4px; border-radius: 2px;
+      vertical-align: middle; margin-right: 0.35rem; background: var(--accent);
+    }
+    .spectrum-bar .legend i.planned { background: none; border: 1.5px dashed var(--muted); height: 6px; }
+    .spectrum-bar .legend i.commissioning { opacity: 0.4; }
+    /* Hydrogen line markers on the spectrum bar */
+    .spectrum-bar .line {
+      position: absolute; top: -5px; height: 16px; width: 2px;
       background: var(--text); border-radius: 1px;
     }
-    .spectrum-bar .ha span {
+    .spectrum-bar .line span {
       position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%);
       white-space: nowrap; font-size: 0.68rem; font-weight: 600; color: var(--accent);
     }
@@ -547,11 +615,67 @@
         <h1 class="hero-name">Robert Klement</h1>
         <p class="hero-lede">I study how binary interaction shapes the lives of massive stars, especially <em>classical Be stars</em> and their stripped companions, using longest baseline interferometry with VLTI and CHARA.</p>
 
-        <!-- Visible spectrum, 400–800 nm, with the Hα line marked -->
-        <div class="spectrum-bar" aria-hidden="true">
+        <!-- Spectrum 0.4–2.5 µm (log scale) with Hα and the wavelength coverage of
+             CHARA, VLTI and MROI beam combiners. Positions: ln(λ/0.4)/ln(2.5/0.4) in %.
+             Lines: Hβ 486 nm, Hα 656 nm, Paβ 1.282 µm, Br11 1.681 µm, Brγ 2.166 µm. -->
+        <div class="spectrum-bar" role="img" aria-label="Wavelength coverage of interferometric beam combiners from 0.4 to 2.5 microns. CHARA: PAVO Blue (planned) 400 to 800 nm, PAVO 630 to 900 nm, SPICA 600 to 900 nm, MIRC-X J and H bands, MYSTIC K band, Silmaril H and K bands. VLTI: PIONIER H band, GRAVITY K band, MATISSE L, M and N bands from 3 to 13 microns. MROI (planned): FOURIER 1.1 to 2.4 microns. Hydrogen lines marked: H-beta 486 nm, H-alpha 656 nm, Paschen-beta 1.282 microns, Brackett-11 1.681 microns, Brackett-gamma 2.166 microns.">
           <div class="bar"></div>
-          <div class="ha"><span>H&alpha; 656 nm</span></div>
-          <div class="ticks"><span>400 nm</span><span>500</span><span>600</span><span>700</span><span>800 nm</span></div>
+          <div class="line" style="left:10.6%" title="Hβ 486.1 nm"><span>H&beta;</span></div>
+          <div class="line" style="left:27%"   title="Hα 656.3 nm"><span>H&alpha;</span></div>
+          <div class="line" style="left:63.6%" title="Paβ 1.282 µm"><span>Pa&beta;</span></div>
+          <div class="line" style="left:78.3%" title="Br11 1.681 µm"><span>Br11</span></div>
+          <div class="line" style="left:92.2%" title="Brγ 2.166 µm"><span>Br&gamma;</span></div>
+          <div class="ticks">
+            <span style="left:0%">0.4 &micro;m</span>
+            <span class="minor" style="left:12.2%">0.5</span>
+            <span style="left:22.1%">0.6</span>
+            <span style="left:37.8%">0.8</span>
+            <span style="left:50%">1</span>
+            <span style="left:72.1%">1.5</span>
+            <span class="minor" style="left:87.8%">2</span>
+            <span style="left:100%">2.5 &micro;m</span>
+          </div>
+
+          <div class="lanes">
+            <!-- CHARA, planned -->
+            <div class="lane">
+              <div class="band planned pavo-blue" style="left:0%; width:37.8%"><span>PAVO Blue &middot; planned</span></div>
+            </div>
+            <!-- CHARA, offered -->
+            <div class="lane">
+              <span class="group">CHARA</span>
+              <div class="band" style="left:24.8%; width:19.5%"><span>PAVO</span></div>
+              <div class="band" style="left:55.2%; width:13.2%"><span>MIRC-X</span></div>
+              <div class="band" style="left:72.1%; width:9.9%"></div>
+              <div class="band" style="left:86.4%; width:11.3%"><span>MYSTIC</span></div>
+            </div>
+            <!-- CHARA, commissioning -->
+            <div class="lane">
+              <div class="band commissioning" style="left:22.1%; width:22.1%"><span>SPICA</span></div>
+              <div class="band commissioning" style="left:72.1%; width:9.9%"><span>Silmaril</span></div>
+              <div class="band commissioning" style="left:86.4%; width:11.3%"></div>
+            </div>
+            <!-- VLTI -->
+            <div class="lane group-start">
+              <span class="group">VLTI</span>
+              <div class="band vlti" style="left:72.1%; width:9.9%"><span>PIONIER</span></div>
+              <div class="band vlti" style="left:87%; width:11.5%"><span>GRAVITY</span></div>
+            </div>
+            <!-- VLTI, MATISSE is off the right edge (L, M, N bands: 3–13 µm) -->
+            <div class="lane">
+              <div class="band vlti offscale" style="left:62%; width:38%"><span>MATISSE &middot; L M N, 3&ndash;13 &micro;m</span></div>
+            </div>
+            <!-- MROI: FOURIER first-light science combiner, 1.1–2.4 µm -->
+            <!-- dashed: still waiting for telescopes -->
+            <div class="lane group-start">
+              <span class="group">MROI</span>
+              <div class="band planned mroi" style="left:55.2%; width:42.5%"><span>FOURIER</span></div>
+            </div>
+          </div>
+          <div class="legend">
+            <span><i class="planned"></i>planned</span>
+            <span><i class="commissioning"></i>commissioning</span>
+          </div>
         </div>
 
         <div class="hero-facts">
